@@ -128,6 +128,25 @@ export default function ContactForm() {
                 placeholder="AI otomasyon"
                 aria-required="true"
               />
+              <div className="mt-2 flex flex-wrap gap-2">
+                {[
+                  "AI entegrasyonu",
+                  "Backend / API",
+                  "Güvenlik & RBAC",
+                  "Otomasyon / Panel",
+                  "Danışmanlık",
+                ].map((chip) => (
+                  <button
+                    key={chip}
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, subject: chip }))}
+                    disabled={state === "loading"}
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {chip}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div>
