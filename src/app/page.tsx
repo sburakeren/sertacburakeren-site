@@ -195,13 +195,12 @@ export default function Home() {
           <Reveal>
             <h2 className={type.h3}>Kurumsal Çalışmalar</h2>
             <p className={`mt-2 max-w-2xl ${type.muted}`}>
-              Kurumsal projelerde AI/otomasyon odaklı teslimler yaptım. NDA nedeniyle detay
-              paylaşamadığım işlerde etki + rol + yaklaşım üzerinden konuşurum.
+              NDA nedeniyle isim yerine rol + yaklaşım + çıktı paylaşıyorum.
             </p>
           </Reveal>
 
           <motion.div
-            className="mt-8 grid gap-6 md:gap-8 md:grid-cols-3"
+            className="mt-8 grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-4"
             variants={stagger}
             initial="initial"
             whileInView="animate"
@@ -209,31 +208,32 @@ export default function Home() {
           >
             {[
               {
-                title: "Sistem Modernizasyonu",
-                desc: "Legacy sistemlerin modern mimariye geçişi. Monolitik yapıları mikroservis tabanlı, ölçeklenebilir altyapıya dönüştürdüm. Modüler tasarım ve API-first yaklaşımla bakım maliyetini düşürüp geliştirme hızını artırdım.",
-                role: "Lead / Full-stack",
-                focus: "Mimari",
+                title: "Finans",
+                desc: "Otomasyon + raporlama + izlenebilirlik odaklı teslimler.",
+                focus: "Süreç & Veri",
               },
               {
-                title: "Otomasyon & İş Akışı",
-                desc: "Tekrarlayan manuel süreçleri otomatik iş akışlarına çevirdim. Queue-bazlı task yönetimi, background job'lar ve akıllı zamanlama ile operasyonel verimliliği artırdım. Ekipler artık stratejik işlere odaklanabiliyor.",
-                role: "Backend / Otomasyon",
-                focus: "Süreç",
+                title: "Hukuk",
+                desc: "İçerik yönetimi + yönlendirme akışları + bakım disiplini.",
+                focus: "Panel & İçerik",
               },
               {
-                title: "AI Entegrasyonu & Arama",
-                desc: "Akıllı öneri motorları ve semantik arama sistemleri kurdum. ML modellerini ürün akışına entegre ederek kullanıcı deneyimini kişiselleştirdim. Veri pipeline'ları ve model deployment süreçlerini optimize ettim.",
-                role: "AI Integration",
-                focus: "ML Ürün",
+                title: "Medya",
+                desc: "Yayın akışı, panel mantığı, operasyonel düzen.",
+                focus: "Yönetim & Akış",
+              },
+              {
+                title: "İç Sistem",
+                desc: "RBAC, audit izi, modüler ekranlar, sürdürülebilir bakım.",
+                focus: "Kurumsal Yazılım",
               },
             ].map((x) => (
               <motion.div key={x.title} variants={fadeUp}>
                 <SpotlightCard>
                   <div className="text-sm font-semibold tracking-tight text-zinc-100">{x.title}</div>
                   <div className="mt-2 text-sm text-zinc-400 leading-relaxed">{x.desc}</div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge variant="slate">Rol: {x.role}</Badge>
-                    <Badge variant="indigo">Odak: {x.focus}</Badge>
+                  <div className="mt-4">
+                    <Badge variant="indigo" className="text-xs">{x.focus}</Badge>
                   </div>
                 </SpotlightCard>
               </motion.div>
