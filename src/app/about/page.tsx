@@ -6,6 +6,8 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CalloutCard from "@/components/ui/CalloutCard";
 import { ChevronIcon } from "@/components/ui/ChevronIcon";
+import { MaskReveal } from "@/components/ui/MaskReveal";
+import { Aurora } from "@/components/ui/Aurora";
 import { type } from "@/lib/typography";
 import { CONTACT, PARTNERS } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -101,13 +103,18 @@ export default function AboutPage() {
         </section>
 
         {/* Focus Areas */}
-        <section id="odak" className="mx-auto max-w-4xl px-6 pb-16">
-          <SectionHeader 
-            title="Odak Alanlarım" 
-            subtitle="Ürün + sistem + güvenlik ekseninde." 
-          />
+        <section id="odak" className="relative mx-auto max-w-4xl px-6 pb-16">
+          <Aurora intensity="subtle" />
+          <div className="relative z-10">
+            <MaskReveal as="h2" className={type.h2}>
+              Odak Alanlarım
+            </MaskReveal>
+            <p className={`mt-2 ${type.muted}`}>
+              Ürün + sistem + güvenlik ekseninde.
+            </p>
+          </div>
 
-          <div className="mt-8 space-y-8">
+          <div className="relative z-10 mt-8 space-y-8">
             <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:translate-x-1">
               <h3 className={`${type.h3} text-indigo-200`}>AI / Veri</h3>
               <p className={`mt-3 ${type.body}`}>
@@ -147,13 +154,18 @@ export default function AboutPage() {
         </section>
 
         {/* Values */}
-        <section id="prensip" className="mx-auto max-w-4xl px-6 pb-16">
-          <SectionHeader 
-            title="Önemsediğim Şeyler" 
-            subtitle="Yazılım geliştirmede temel değerlerim." 
-          />
+        <section id="prensip" className="relative mx-auto max-w-4xl px-6 pb-16">
+          <Aurora intensity="subtle" />
+          <div className="relative z-10">
+            <MaskReveal as="h2" className={type.h2}>
+              Önemsediğim Şeyler
+            </MaskReveal>
+            <p className={`mt-2 ${type.muted}`}>
+              Yazılım geliştirmede temel değerlerim.
+            </p>
+          </div>
 
-          <div className="mt-8 space-y-6">
+          <div className="relative z-10 mt-8 space-y-6">
             <div>
               <h3 className={type.label}>Güvenilirlik</h3>
               <p className={`mt-2 ${type.body}`}>
@@ -191,13 +203,18 @@ export default function AboutPage() {
         </section>
 
         {/* Timeline */}
-        <section id="timeline" className="mx-auto max-w-4xl px-6 pb-20">
-          <SectionHeader 
-            title="Yakın Dönem" 
-            subtitle="Son yıllarda odaklandığım alanlar ve projeler." 
-          />
+        <section id="timeline" className="relative mx-auto max-w-4xl px-6 pb-20">
+          <Aurora intensity="subtle" />
+          <div className="relative z-10">
+            <MaskReveal as="h2" className={type.h2}>
+              Yakın Dönem
+            </MaskReveal>
+            <p className={`mt-2 ${type.muted}`}>
+              Son yıllarda odaklandığım alanlar ve projeler.
+            </p>
+          </div>
 
-          <div className="mt-8 space-y-8 relative">
+          <div className="relative z-10 mt-8 space-y-8">
             {/* Animated border line */}
             <div className="absolute left-0 top-0 bottom-0 w-px overflow-hidden">
               <div className="h-full w-full bg-gradient-to-b from-transparent via-indigo-500/30 to-transparent" />
@@ -242,13 +259,17 @@ export default function AboutPage() {
         </section>
 
         {/* Partners / Studio */}
-        <section className="mx-auto max-w-4xl px-6 pb-16">
-          <SectionHeader 
-            title="Ortaklık / Stüdyo" 
-            subtitle="Çalıştığım ve yönettiğim girişimler." 
-          />
+        <section className="relative mx-auto max-w-4xl px-6 pb-16">
+          <div className="relative z-10">
+            <MaskReveal as="h2" className={type.h2}>
+              Ortaklık / Stüdyo
+            </MaskReveal>
+            <p className={`mt-2 ${type.muted}`}>
+              Çalıştığım ve yönettiğim girişimler.
+            </p>
+          </div>
 
-          <div className="mt-8 space-y-6">
+          <div className="relative z-10 mt-8 space-y-6">
             {/* GNR Studio */}
             <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]">
               <div className="flex items-start justify-between gap-4">

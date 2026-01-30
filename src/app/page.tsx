@@ -15,6 +15,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import AIGlow from "@/components/ui/AIGlow";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { ChevronIcon } from "@/components/ui/ChevronIcon";
+import { ExploreRail } from "@/components/ui/ExploreRail";
 import { PROJECTS } from "@/data/projects";
 import { COLLABORATIONS } from "@/data/collabs";
 import { CONTACT, PARTNERS } from "@/lib/constants";
@@ -96,25 +97,14 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <Reveal>
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <div className={type.kicker}>About</div>
-                <h2 className={`mt-2 ${type.h2}`}>
-                  Hakkımda
-                </h2>
-                <p className={`mt-2 max-w-2xl ${type.body}`}>
-                  IT yöneticiliği, ürün geliştirme ve güvenlik deneyimiyle kurumsal süreçleri
-                  ölçülebilir hale getirip otomasyona çeviriyorum. Ürün odağı sürekli, sonuç odaklı yaklaşım her zaman.
-                </p>
-              </div>
-
-              <Link
-                href="/about"
-                className="group hidden md:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
-              >
-                Daha fazlası
-                <ChevronIcon className="text-zinc-500 group-hover:text-zinc-300" />
-              </Link>
+            <div>
+              <h2 className={type.h2}>
+                Hakkımda
+              </h2>
+              <p className={`mt-3 max-w-2xl ${type.body}`}>
+                IT yöneticiliği, ürün geliştirme ve güvenlik deneyimiyle kurumsal süreçleri
+                ölçülebilir hale getirip otomasyona çeviriyorum. Ürün odağı sürekli, sonuç odaklı yaklaşım her zaman.
+              </p>
             </div>
           </Reveal>
 
@@ -191,15 +181,15 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          <div className="mt-8 md:hidden">
-            <Link
-              href="/about"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
-            >
-              Daha fazlası
-              <ChevronIcon className="text-zinc-500 group-hover:text-zinc-300" />
-            </Link>
-          </div>
+          <motion.div
+            className="mt-10"
+            variants={fadeUp}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <ExploreRail href="/about" />
+          </motion.div>
         </motion.section>
 
         <div className="relative z-10 mx-auto my-16 md:my-24 max-w-7xl px-6">
