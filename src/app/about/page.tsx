@@ -102,13 +102,12 @@ export default function AboutPage() {
         {/* Focus Areas */}
         <section id="odak" className="mx-auto max-w-4xl px-6 pb-16">
           <SectionHeader 
-            kicker="ODAK" 
             title="Odak Alanlarım" 
             subtitle="Ürün + sistem + güvenlik ekseninde." 
           />
 
           <div className="mt-8 space-y-8">
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:translate-x-1">
               <h3 className={`${type.h3} text-indigo-200`}>AI / Veri</h3>
               <p className={`mt-3 ${type.body}`}>
                 AI modellerini ürünlere entegre eder, içgörü için veri pipeline'ları kurar ve
@@ -117,7 +116,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:translate-x-1">
               <h3 className={`${type.h3} text-emerald-200`}>Güvenlik</h3>
               <p className={`mt-3 ${type.body}`}>
                 RBAC, audit izi, input validasyonu ve güvenli defaults baştan kurguluyorum.
@@ -126,7 +125,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:translate-x-1">
               <h3 className={`${type.h3} text-amber-200`}>Backend / Ölçek</h3>
               <p className={`mt-3 ${type.body}`}>
                 Laravel, .NET ve modern backend stack'leri. Kırılmadan ölçeklenen modüler mimariler.
@@ -135,7 +134,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:translate-x-1">
               <h3 className={type.h3}>Ürün Düşüncesi</h3>
               <p className={`mt-3 ${type.body}`}>
                 Kullanıcı çıktılarıyla yönlenen teknik kararlar. Gerçek problemleri çözen özellikler
@@ -149,7 +148,6 @@ export default function AboutPage() {
         {/* Values */}
         <section id="prensip" className="mx-auto max-w-4xl px-6 pb-16">
           <SectionHeader 
-            kicker="PRENSİP" 
             title="Önemsediğim Şeyler" 
             subtitle="Yazılım geliştirmede temel değerlerim." 
           />
@@ -194,15 +192,21 @@ export default function AboutPage() {
         {/* Timeline */}
         <section id="timeline" className="mx-auto max-w-4xl px-6 pb-20">
           <SectionHeader 
-            kicker="ZAMAN ÇİZELGESİ" 
             title="Yakın Dönem" 
             subtitle="Son yıllarda odaklandığım alanlar ve projeler." 
           />
 
-          <div className="mt-8 space-y-6 border-l border-white/10 pl-6">
-            <div>
-              <div className={type.muted}>2024</div>
-              <h3 className={`mt-1 ${type.label}`}>
+          <div className="mt-8 space-y-8 relative">
+            {/* Animated border line */}
+            <div className="absolute left-0 top-0 bottom-0 w-px overflow-hidden">
+              <div className="h-full w-full bg-gradient-to-b from-transparent via-indigo-500/30 to-transparent" />
+            </div>
+            
+            <div className="group relative pl-8 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-indigo-400 before:ring-4 before:ring-indigo-400/20 hover:before:ring-indigo-400/40 before:transition-all">
+              <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-300 border border-indigo-500/20">
+                2024
+              </div>
+              <h3 className={`mt-3 ${type.label}`}>
                 AI Entegrasyonu & Veri Pipeline Projeleri
               </h3>
               <p className={`mt-2 ${type.muted}`}>
@@ -211,18 +215,22 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div>
-              <div className={type.muted}>2023</div>
-              <h3 className={`mt-1 ${type.label}`}>Kurumsal Platform Geliştirme</h3>
+            <div className="group relative pl-8 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-emerald-400 before:ring-4 before:ring-emerald-400/20 hover:before:ring-emerald-400/40 before:transition-all">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300 border border-emerald-500/20">
+                2023
+              </div>
+              <h3 className={`mt-3 ${type.label}`}>Kurumsal Platform Geliştirme</h3>
               <p className={`mt-2 ${type.muted}`}>
                 RBAC, audit izi ve otomatik raporlama içeren modüler sistemler tasarladım.
                 Manuel iş yükünü azalttım ve operasyonel görünürlüğü güçlendirdim.
               </p>
             </div>
 
-            <div>
-              <div className={type.muted}>2022</div>
-              <h3 className={`mt-1 ${type.label}`}>Ürün Lansmanı & Solo Geliştirme</h3>
+            <div className="group relative pl-8 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-amber-400 before:ring-4 before:ring-amber-400/20 hover:before:ring-amber-400/40 before:transition-all">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300 border border-amber-500/20">
+                2022
+              </div>
+              <h3 className={`mt-3 ${type.label}`}>Ürün Lansmanı & Solo Geliştirme</h3>
               <p className={`mt-2 ${type.muted}`}>
                 Küçük işletmeler için offline-first masaüstü uygulamaları ship ettim. Manuel
                 hataları azaltmaya ve veri bütünlüğünü korumaya odaklandım. Basit çözümlerin
