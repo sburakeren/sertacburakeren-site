@@ -1,0 +1,257 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Button from "@/components/ui/Button";
+import ButtonLink from "@/components/ui/ButtonLink";
+import GlowCard from "@/components/GlowCard";
+import { type } from "@/lib/typography";
+import { CONTACT, getWhatsAppLink } from "@/lib/constants";
+
+type FormState = "idle" | "loading" | "success" | "error";
+
+export default function ContactForm() {
+  const [state, setState] = useState<FormState>("idle");
+  const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState(""); // bot yakalayıcı
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    details: "",
+  });
+
+  const canSubmit = useMemo(() => {
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    return (
+      form.name.trim().length >= 2 &&
+      emailOk &&
+      form.subject.trim().length >= 3 &&
+      form.details.trim().length >= 10 &&
+      honeypot.trim().length === 0 &&
+      state !== "loading"
+    );
+  }, [form, honeypot, state]);
+
+  const onChange =
+    (key: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setForm((p) => ({ ...p, [key]: e.target.value }));
+    };
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+
+    if (!canSubmit) {
+      setState("error");
+      setMessage("Formu kontrol et: isim/email/konu/mesaj yeterli uzunlukta olmalı.");
+      return;
+    }
+
+    setState("loading");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...form, honeypot }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      setState("success");
+      setMessage("Mesajın alındı. En kısa sürede dönüş yapacağım.");
+      setForm({ name: "", email: "", subject: "", details: "" });
+    } catch {
+      setState("error");
+      setMessage(`Şu an gönderilemedi. Mail ile de yazabilirsin: ${CONTACT.EMAIL}`);
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-5xl">
+      <div className="grid gap-8 lg:grid-cols-[2fr_1fr]">
+        {/* Left: Contact Form */}
+        <GlowCard className="group/form">
+          <form onSubmit={onSubmit} className="space-y-5">
+            {/* Honeypot (hidden) */}
+            <div className="hidden">
+              <label className="text-xs text-zinc-400">Do not fill</label>
+              <input value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <label htmlFor="contact-name" className={`${type.label} text-zinc-400`}>
+                  İsim
+                </label>
+                <input
+                  id="contact-name"
+                  value={form.name}
+                  onChange={onChange("name")}
+                  disabled={state === "loading"}
+                  className="mt-1.5 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none transition-all focus:border-white/20 focus:bg-white/7 focus:ring-2 focus:ring-white/10 disabled:opacity-50 disabled:cursor-not-allowed md:h-11"
+                  placeholder="Ad Soyad"
+                  autoComplete="name"
+                  aria-required="true"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-email" className={`${type.label} text-zinc-400`}>
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  value={form.email}
+                  onChange={onChange("email")}
+                  disabled={state === "loading"}
+                  className="mt-1.5 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none transition-all focus:border-white/20 focus:bg-white/7 focus:ring-2 focus:ring-white/10 disabled:opacity-50 disabled:cursor-not-allowed md:h-11"
+                  placeholder="E-posta adresiniz"
+                  autoComplete="email"
+                  aria-required="true"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="contact-subject" className={`${type.label} text-zinc-400`}>
+                Konu
+              </label>
+              <input
+                id="contact-subject"
+                value={form.subject}
+                onChange={onChange("subject")}
+                disabled={state === "loading"}
+                className="mt-1.5 h-10 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none transition-all focus:border-white/20 focus:bg-white/7 focus:ring-2 focus:ring-white/10 disabled:opacity-50 disabled:cursor-not-allowed md:h-11"
+                placeholder="AI otomasyon"
+                aria-required="true"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="contact-details" className={`${type.label} text-zinc-400`}>
+                Mesaj
+              </label>
+              <textarea
+                id="contact-details"
+                value={form.details}
+                onChange={onChange("details")}
+                disabled={state === "loading"}
+                className="mt-1.5 min-h-[140px] w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none transition-all focus:border-white/20 focus:bg-white/7 focus:ring-2 focus:ring-white/10 disabled:opacity-50 disabled:cursor-not-allowed md:min-h-[160px]"
+                placeholder="Projeniz hakkında kısaca bilgi verin..."
+                aria-required="true"
+              />
+              <div className={`mt-1.5 ${type.muted} text-zinc-500`}>
+                2–3 cümle yeter: hedef, mevcut durum, hedef tarih.
+                <br />
+                <span className="text-xs">Örnek: konu + mevcut durum + hedef tarih.</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 pt-2">
+              <Button
+                type="submit"
+                disabled={!canSubmit}
+                variant="primary"
+                size="md"
+                aria-label="Mesaj gönder"
+              >
+                {state === "loading" ? "Gönderiliyor..." : "Gönder"}
+              </Button>
+              
+              <div className={`${type.muted} text-xs text-zinc-500`}>
+                NDA olan işlerde detay yerine rol + yaklaşım paylaşırım.
+              </div>
+
+              {message && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className={`rounded-xl border px-4 py-3 text-sm ${
+                    state === "success"
+                      ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-200"
+                      : "border-red-500/20 bg-red-500/10 text-red-200"
+                  }`}
+                >
+                  {message}
+                </div>
+              )}
+            </div>
+          </form>
+        </GlowCard>
+
+        {/* Right: Quick Contact */}
+        <div className="space-y-6">
+          <GlowCard>
+            <div className="space-y-5">
+              <div>
+                <h3 className={type.h3}>Hızlı İletişim</h3>
+                <p className={`mt-1.5 ${type.muted}`}>
+                  Direkt ulaşmak için tercih edin
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                {/* WhatsApp */}
+                <ButtonLink
+                  href={getWhatsAppLink()}
+                  variant="secondary"
+                  size="sm"
+                  className="w-full justify-start gap-3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                  </svg>
+                  WhatsApp'tan Yaz
+                </ButtonLink>
+
+                {/* Email */}
+                <ButtonLink
+                  href={`mailto:${CONTACT.EMAIL}?subject=Portfolio%20İletişim`}
+                  variant="secondary"
+                  size="sm"
+                  className="w-full justify-start gap-3"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Email Gönder
+                </ButtonLink>
+
+                {/* LinkedIn */}
+                <ButtonLink
+                  href={CONTACT.LINKEDIN}
+                  variant="secondary"
+                  size="sm"
+                  className="w-full justify-start gap-3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                  LinkedIn
+                </ButtonLink>
+              </div>
+
+              <div className="border-t border-white/10 pt-4">
+                <p className={`${type.muted} text-zinc-500`}>
+                  💬 Genelde 24 saat içinde dönüş yapıyorum.
+                </p>
+              </div>
+            </div>
+          </GlowCard>
+        </div>
+      </div>
+    </div>
+  );
+}

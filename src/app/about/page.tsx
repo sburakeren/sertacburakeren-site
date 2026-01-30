@@ -3,6 +3,8 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import Navbar from "@/components/Navbar";
 import AIGlow from "@/components/ui/AIGlow";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import SectionHeader from "@/components/ui/SectionHeader";
+import CalloutCard from "@/components/ui/CalloutCard";
 import { type } from "@/lib/typography";
 import { CONTACT } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -50,11 +52,60 @@ export default function AboutPage() {
             Ölçülebilir sonuçlar, güvenlik odaklı mimari ve ileri görüşlü çözümler her zaman
             odağımın merkezinde. Güvenilirlik ve netlik varsayılanım.
           </p>
+          
+          {/* Signature Strip */}
+          <div className="relative z-10 mt-10">
+            <CalloutCard title="İmza" desc="Temel prensiplerin kısa özeti:" tone="indigo">
+              <ul className="space-y-2 text-sm text-zinc-300">
+                <li className="flex gap-2">
+                  <span className="text-indigo-400">•</span>
+                  <span>Güvenlik varsayılan.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-indigo-400">•</span>
+                  <span>Netlik: okunur, sürdürülebilir kod.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-indigo-400">•</span>
+                  <span>Ship odaklı iterasyon.</span>
+                </li>
+              </ul>
+            </CalloutCard>
+            
+            {/* In-page Navigation */}
+            <nav className="mt-8 flex flex-wrap gap-4 text-sm" aria-label="Sayfa içi navigasyon">
+              <a 
+                href="#odak" 
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
+              >
+                Odak
+                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+              <a 
+                href="#prensip" 
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
+              >
+                Prensipler
+                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+              <a 
+                href="#timeline" 
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
+              >
+                Yakın Dönem
+                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+            </nav>
+          </div>
         </section>
 
         {/* Focus Areas */}
-        <section className="mx-auto max-w-4xl px-6 pb-16">
-          <h2 className={type.h2}>Odak Alanlarım</h2>
+        <section id="odak" className="mx-auto max-w-4xl px-6 pb-16">
+          <SectionHeader 
+            kicker="ODAK" 
+            title="Odak Alanlarım" 
+            subtitle="Ürün + sistem + güvenlik ekseninde." 
+          />
 
           <div className="mt-8 space-y-8">
             <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
@@ -69,7 +120,7 @@ export default function AboutPage() {
             <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
               <h3 className={`${type.h3} text-emerald-200`}>Güvenlik</h3>
               <p className={`mt-3 ${type.body}`}>
-                Güvenlik varsayılan: RBAC, audit izi, input validasyonu ve güvenli defaults.
+                RBAC, audit izi, input validasyonu ve güvenli defaults baştan kurguluyorum.
                 Uyumluluk gereksinimlerini karşılayan, bakılabilir sistemler kurarım.
                 Önleme, tepkiden önce gelir.
               </p>
@@ -96,8 +147,12 @@ export default function AboutPage() {
         </section>
 
         {/* Values */}
-        <section className="mx-auto max-w-4xl px-6 pb-16">
-          <h2 className={type.h2}>Önemsediğim Şeyler</h2>
+        <section id="prensip" className="mx-auto max-w-4xl px-6 pb-16">
+          <SectionHeader 
+            kicker="PRENSİP" 
+            title="Önemsediğim Şeyler" 
+            subtitle="Yazılım geliştirmede temel değerlerim." 
+          />
 
           <div className="mt-8 space-y-6">
             <div>
@@ -137,8 +192,12 @@ export default function AboutPage() {
         </section>
 
         {/* Timeline */}
-        <section className="mx-auto max-w-4xl px-6 pb-20">
-          <h2 className={type.h2}>Yakın Dönem</h2>
+        <section id="timeline" className="mx-auto max-w-4xl px-6 pb-20">
+          <SectionHeader 
+            kicker="ZAMAN ÇİZELGESİ" 
+            title="Yakın Dönem" 
+            subtitle="Son yıllarda odaklandığım alanlar ve projeler." 
+          />
 
           <div className="mt-8 space-y-6 border-l border-white/10 pl-6">
             <div>
@@ -175,19 +234,58 @@ export default function AboutPage() {
 
         {/* CTA */}
         <section className="border-t border-white/5 bg-[#070A12]/60">
-          <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-            <h2 className={type.h2}>Birlikte Çalışalım</h2>
-            <p className={`mt-3 ${type.body}`}>
-              İddialı bir şey inşa ediyorsan, konuşalım.
-            </p>
-            <ButtonLink
-              href={`mailto:${CONTACT.EMAIL}`}
-              variant="primary"
-              size="md"
-              className="mt-6"
-            >
-              İletişime Geç
-            </ButtonLink>
+          <div className="mx-auto max-w-4xl px-6 py-16">
+            <div className="text-center mb-10">
+              <h2 className={type.h2}>Birlikte Çalışalım</h2>
+              <p className={`mt-3 ${type.body}`}>
+                İddialı bir şey inşa ediyorsan, konuşalım.
+              </p>
+              <p className={`mt-2 ${type.muted}`}>
+                Kısa bir özet yaz, 24–48 saat içinde döneyim.
+              </p>
+              <ButtonLink
+                href={`mailto:${CONTACT.EMAIL}`}
+                variant="primary"
+                size="md"
+                className="mt-6"
+              >
+                İletişime Geç
+              </ButtonLink>
+              <div className="mt-4">
+                <a 
+                  href={`mailto:${CONTACT.EMAIL}`}
+                  className="text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
+                >
+                  Hızlıca mail at →
+                </a>
+              </div>
+            </div>
+            
+            {/* Hızlı İletişim */}
+            <div className="max-w-md mx-auto">
+              <CalloutCard 
+                title="Hızlı İletişim" 
+                desc="Mail/WhatsApp üzerinden direkt yazabilirsin." 
+                tone="emerald"
+              >
+                <div className="space-y-2">
+                  <a 
+                    href={`mailto:${CONTACT.EMAIL}`}
+                    className="block text-sm text-emerald-300 hover:text-emerald-200 transition-colors"
+                  >
+                    📧 {CONTACT.EMAIL}
+                  </a>
+                  <a 
+                    href={CONTACT.LINKEDIN}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-sm text-emerald-300 hover:text-emerald-200 transition-colors"
+                  >
+                    💼 LinkedIn
+                  </a>
+                </div>
+              </CalloutCard>
+            </div>
           </div>
         </section>
 

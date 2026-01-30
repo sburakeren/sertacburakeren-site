@@ -2,6 +2,8 @@ import SiteFooter from "@/components/SiteFooter";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Navbar from "@/components/Navbar";
 import AIGlow from "@/components/ui/AIGlow";
+import SectionHeader from "@/components/ui/SectionHeader";
+import CalloutCard from "@/components/ui/CalloutCard";
 import { type } from "@/lib/typography";
 import { CONTACT } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -49,7 +51,12 @@ export default function NowPage() {
 
         {/* Güncel Panel */}
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <div className="grid gap-4 md:grid-cols-3">
+          <SectionHeader 
+            kicker="GÜNCEL" 
+            title="Şu An" 
+            subtitle="Odak, öğrenme ve yakın plan." 
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5">
               <div className={`${type.kicker} text-indigo-200`}>Şu an</div>
               <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
@@ -73,9 +80,31 @@ export default function NowPage() {
           </div>
         </section>
 
+        {/* Çalışma Modu */}
+        <section className="mx-auto max-w-3xl px-6 pb-16">
+          <div className="grid gap-4 md:grid-cols-3">
+            <CalloutCard 
+              title="Derin Çalışma" 
+              desc="Kesintisiz odak blokları ile karmaşık problemlere dalış. Sabah saatleri en üretken." 
+              tone="indigo"
+            />
+            <CalloutCard 
+              title="Dokümantasyon" 
+              desc="Mimari kararları ve teknik seçimleri yazıya dökmek. Gelecek için yol haritası." 
+              tone="emerald"
+            />
+            <CalloutCard 
+              title="Geri Bildirim Döngüsü" 
+              desc="Hızlı iterasyon, kullanıcı testleri ve metrik takibi. Ship, ölç, öğren, tekrarla." 
+              tone="slate"
+            />
+          </div>
+        </section>
+
         {/* Currently */}
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className={type.h2}>Şu An</h2>
+          <div className={type.kicker}>İNŞA EDİYORUM</div>
+          <h2 className={`mt-3 ${type.h2}`}>Şu An</h2>
 
           <div className="mt-8 space-y-6">
             <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
@@ -162,7 +191,8 @@ export default function NowPage() {
 
         {/* Principles */}
         <section className="mx-auto max-w-3xl px-6 pb-20">
-          <h2 className={type.h2}>Çalışma Prensiplerim</h2>
+          <div className={type.kicker}>PRENSİPLER</div>
+          <h2 className={`mt-3 ${type.h2}`}>Çalışma Prensiplerim</h2>
 
           <div className={`mt-8 space-y-4 ${type.body}`}>
             <p>
@@ -189,9 +219,9 @@ export default function NowPage() {
             </p>
 
             <p>
-              <strong className="text-zinc-200">Güvenlik varsayılan.</strong> Sonradan eklenen
+              <strong className="text-zinc-200">Güvenlik ilk günden.</strong> Sonradan eklenen
               güvenlik başarısız olur. Input validasyonu, RBAC, audit logları ve güvenli
-              varsayılanlar ilk günden.
+              varsayılanlar baştan kurguluyorum.
             </p>
 
             <p>
