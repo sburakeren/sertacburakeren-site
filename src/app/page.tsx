@@ -61,6 +61,16 @@ export default function Home() {
               </div>
 
             <PromptTyper />
+            
+            <div className="mt-4 text-center">
+              <Link 
+                href="/lab" 
+                className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-indigo-300 transition-colors"
+              >
+                Lab: NDA-safe demo
+                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+              </Link>
+            </div>
           </MotionDiv>
         </section>
 
