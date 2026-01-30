@@ -1,33 +1,17 @@
+"use client";
+
 import SiteFooter from "@/components/SiteFooter";
 import ButtonLink from "@/components/ui/ButtonLink";
 import Navbar from "@/components/Navbar";
 import AIGlow from "@/components/ui/AIGlow";
-import SectionHeader from "@/components/ui/SectionHeader";
 import CalloutCard from "@/components/ui/CalloutCard";
+import { MaskReveal } from "@/components/ui/MaskReveal";
 import { type } from "@/lib/typography";
 import { CONTACT, PARTNERS } from "@/lib/constants";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Şu An",
-  description:
-    "Şu an üzerinde çalıştığım, öğrendiğim ve düşündüğüm konular. Güncel odak alanlarım ve çalışma prensiplerimi düzenli olarak güncelliyorum.",
-  alternates: {
-    canonical: "/now",
-  },
-  openGraph: {
-    title: "Şu An | Sertaç Burak Eren",
-    description: "Şu an üzerinde çalıştığım, öğrendiğim ve düşündüğüm konular.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Şu An | Sertaç Burak Eren",
-    description: "Şu an üzerinde çalıştığım, öğrendiğim ve düşündüğüm konular.",
-  },
-};
+import { useState } from "react";
 
 export default function NowPage() {
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   return (
     <div className="relative min-h-screen bg-[#070A12]">
       {/* Background */}
@@ -41,22 +25,34 @@ export default function NowPage() {
           {/* AI Glow - Now Header */}
           <AIGlow intensity="medium" />
           
-          <h1 className={`relative z-10 max-w-3xl ${type.h1}`}>
-            Şu An Ne Yapıyorum
-          </h1>
-          <p className={`relative z-10 mt-6 ${type.muted}`}>
-            Güncelleme: Ocak 2026 — Güncel odak, iş ve düşüncelerimin anlık görüntüsü.
-          </p>
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="relative flex items-center gap-2">
+                {/* Pulsing green dot */}
+                <span className="relative flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
+                </span>
+                <span className="text-xs font-medium uppercase tracking-wider text-emerald-300">
+                  Aktif
+                </span>
+              </div>
+              <span className="text-xs text-zinc-500">•</span>
+              <span className="text-xs text-zinc-500">Güncelleme: Ocak 2026</span>
+            </div>
+
+            <MaskReveal as="h1" className={type.h1}>
+              Şu An Ne Yapıyorum
+            </MaskReveal>
+            <p className={`mt-6 ${type.muted}`}>
+              Güncel odak, iş ve düşüncelerimin canlı görüntüsü.
+            </p>
+          </div>
         </section>
 
-        {/* Güncel Panel */}
-        <section className="mx-auto max-w-3xl px-6 pb-16">
-          <SectionHeader 
-            kicker="GÜNCEL" 
-            title="Şu An" 
-            subtitle="Odak, öğrenme ve yakın plan." 
-          />
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {/* Quick Status Strip */}
+        <section className="mx-auto max-w-3xl px-6 pb-12">
+          <div className="grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5">
               <div className={`${type.kicker} text-indigo-200`}>Şu an</div>
               <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
@@ -101,14 +97,25 @@ export default function NowPage() {
           </div>
         </section>
 
-        {/* Currently */}
+        {/* Live Status Panel */}
         <section className="mx-auto max-w-3xl px-6 pb-16">
-          <div className={type.kicker}>İNŞA EDİYORUM</div>
-          <h2 className={`mt-3 ${type.h2}`}>Şu An</h2>
+          <h2 className={`${type.h2} mb-8`}>Canlı Durum Paneli</h2>
 
-          <div className="mt-8 space-y-6">
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-              <h3 className={`${type.label} text-indigo-200`}>İnşa Ediyorum</h3>
+          <div className="space-y-4">
+            {/* İnşa Ediyorum */}
+            <div
+              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+                hoveredItem === null || hoveredItem === "build"
+                  ? "border-indigo-500/20 translate-x-0 opacity-100"
+                  : "border-white/5 -translate-x-1 opacity-60"
+              }`}
+              onMouseEnter={() => setHoveredItem("build")}
+              onMouseLeave={() => setHoveredItem(null)}
+            >
+              <h3 className={`${type.label} text-indigo-200 flex items-center gap-2`}>
+                <span className="h-2 w-2 rounded-full bg-indigo-400"></span>
+                İnşa Ediyorum
+              </h3>
               <ul className={`mt-4 space-y-3 ${type.body}`}>
                 <li className="flex gap-3">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-indigo-400" />
@@ -133,8 +140,20 @@ export default function NowPage() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-              <h3 className={`${type.label} text-emerald-200`}>Öğreniyorum</h3>
+            {/* Öğreniyorum */}
+            <div
+              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+                hoveredItem === null || hoveredItem === "learn"
+                  ? "border-emerald-500/20 translate-x-0 opacity-100"
+                  : "border-white/5 -translate-x-1 opacity-60"
+              }`}
+              onMouseEnter={() => setHoveredItem("learn")}
+              onMouseLeave={() => setHoveredItem(null)}
+            >
+              <h3 className={`${type.label} text-emerald-200 flex items-center gap-2`}>
+                <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+                Öğreniyorum
+              </h3>
               <ul className={`mt-4 space-y-3 ${type.body}`}>
                 <li className="flex gap-3">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-400" />
@@ -160,8 +179,20 @@ export default function NowPage() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
-              <h3 className={`${type.label} text-amber-200`}>Ship Ediyorum</h3>
+            {/* Ship Ediyorum */}
+            <div
+              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+                hoveredItem === null || hoveredItem === "ship"
+                  ? "border-amber-500/20 translate-x-0 opacity-100"
+                  : "border-white/5 -translate-x-1 opacity-60"
+              }`}
+              onMouseEnter={() => setHoveredItem("ship")}
+              onMouseLeave={() => setHoveredItem(null)}
+            >
+              <h3 className={`${type.label} text-amber-200 flex items-center gap-2`}>
+                <span className="h-2 w-2 rounded-full bg-amber-400"></span>
+                Ship Ediyorum
+              </h3>
               <ul className={`mt-4 space-y-3 ${type.body}`}>
                 <li className="flex gap-3">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-400" />
