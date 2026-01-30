@@ -22,6 +22,8 @@ export type Project = {
   ogImage?: string; // Custom OG image per project
 };
 
+import { validateProjects } from "@/lib/projects/validateProjects";
+
 export const PROJECTS: Project[] = [
   {
     slug: "ankaralifeportal",
@@ -316,6 +318,5 @@ export const PROJECTS: Project[] = [
 
 // Dev-only validation: ensure all projects meet minimum content requirements
 if (process.env.NODE_ENV !== "production") {
-  const { validateProjects } = require("@/lib/projects/validateProjects");
   validateProjects(PROJECTS);
 }
