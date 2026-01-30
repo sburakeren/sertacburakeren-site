@@ -161,8 +161,9 @@ export default function ContactForm() {
                 {state === "loading" ? "Gönderiliyor..." : "Gönder"}
               </Button>
               
-              <div className={`${type.muted} text-xs text-zinc-500`}>
-                NDA olan işlerde detay yerine rol + yaklaşım paylaşırım.
+              <div className={`${type.muted} space-y-1 text-xs text-zinc-500`}>
+                <div>Spam koruması açık. 1 dakika içinde 1 gönderim.</div>
+                <div>NDA olan işlerde detay yerine rol + yaklaşım paylaşırım.</div>
               </div>
 
               {message && (
