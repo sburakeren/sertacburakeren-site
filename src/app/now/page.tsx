@@ -5,7 +5,7 @@ import AIGlow from "@/components/ui/AIGlow";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CalloutCard from "@/components/ui/CalloutCard";
 import { type } from "@/lib/typography";
-import { CONTACT } from "@/lib/constants";
+import { CONTACT, PARTNERS } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -74,7 +74,7 @@ export default function NowPage() {
             <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
               <div className={`${type.kicker} text-amber-200`}>Son eklenen</div>
               <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
-                Portfolio sitesine yeni case study'ler ve proje detayları eklendi.
+                MitrasLawBlog (GNR Studio): aktif geliştirme, yayın akışı ve panel iyileştirmeleri.
               </p>
             </div>
           </div>
@@ -166,6 +166,20 @@ export default function NowPage() {
                 <li className="flex gap-3">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-400" />
                   <span>
+                    <a
+                      href={PARTNERS.MITRAS_LAW_BLOG.WEBSITE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-300 hover:text-amber-200 underline decoration-amber-500/30 hover:decoration-amber-300 transition-colors"
+                    >
+                      MitrasLawBlog
+                    </a>
+                    {" "}(GNR Studio bünyesinde): İçerik yönetim paneli, SEO iyileştirmeleri ve yayın akışı optimizasyonları.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-400" />
+                  <span>
                     Mevcut projelerde haftalık iterasyonlar—ölçülebilir sonuçlara ve kullanıcı geri
                     bildirim döngülerine odaklanıyorum.
                   </span>
@@ -175,13 +189,6 @@ export default function NowPage() {
                   <span>
                     Dokümantasyon ve bilgi paylaşımı—teknik kılavuzlar, mimari kararlar ve öğrenilen
                     dersler yazıyorum.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-400" />
-                  <span>
-                    Projelerimde geliştirici deneyimini iyileştiriyorum—daha iyi hata mesajları,
-                    daha net loglar ve daha akıcı onboarding.
                   </span>
                 </li>
               </ul>

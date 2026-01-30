@@ -6,7 +6,7 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CalloutCard from "@/components/ui/CalloutCard";
 import { type } from "@/lib/typography";
-import { CONTACT } from "@/lib/constants";
+import { CONTACT, PARTNERS } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -236,6 +236,80 @@ export default function AboutPage() {
                 hataları azaltmaya ve veri bütünlüğünü korumaya odaklandım. Basit çözümlerin
                 kazandığının kanıtı.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Partners / Studio */}
+        <section className="mx-auto max-w-4xl px-6 pb-16">
+          <SectionHeader 
+            title="Ortaklık / Stüdyo" 
+            subtitle="Çalıştığım ve yönettiğim girişimler." 
+          />
+
+          <div className="mt-8 space-y-6">
+            {/* GNR Studio */}
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className={`${type.h3} text-indigo-200`}>{PARTNERS.GNR_STUDIO.NAME}</h3>
+                  <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
+                    {PARTNERS.GNR_STUDIO.BIO_TR}
+                  </p>
+                  <p className={`mt-2 text-xs leading-relaxed text-zinc-500 italic`}>
+                    {PARTNERS.GNR_STUDIO.BIO_EN}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a
+                      href={PARTNERS.GNR_STUDIO.WEBSITE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-indigo-300 hover:text-indigo-200 transition-colors group"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                      </svg>
+                      gnrstudio.com
+                      <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                    </a>
+                    <a
+                      href={`mailto:${PARTNERS.GNR_STUDIO.EMAIL}`}
+                      className="inline-flex items-center gap-1.5 text-sm text-indigo-300 hover:text-indigo-200 transition-colors group"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      contact@gnrstudio.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* MitrasLawBlog */}
+            <div className="group/card rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04]">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className={`${type.h3} text-emerald-200`}>{PARTNERS.MITRAS_LAW_BLOG.NAME}</h3>
+                  <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
+                    {PARTNERS.MITRAS_LAW_BLOG.DESC}
+                  </p>
+                  <div className="mt-4">
+                    <a
+                      href={PARTNERS.MITRAS_LAW_BLOG.WEBSITE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-emerald-300 hover:text-emerald-200 transition-colors group"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                      </svg>
+                      mitraslawblog.com
+                      <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

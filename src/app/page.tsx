@@ -15,6 +15,7 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import AIGlow from "@/components/ui/AIGlow";
 import { PROJECTS } from "@/data/projects";
 import { COLLABORATIONS } from "@/data/collabs";
+import { CONTACT, PARTNERS } from "@/lib/constants";
 import { type } from "@/lib/typography";
 import { fadeUp, stagger } from "@/lib/motion";
 import { Reveal } from "@/components/motion/Reveal";
@@ -409,30 +410,38 @@ export default function Home() {
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 md:flex-row">
             <div className="text-center text-sm text-zinc-400 md:text-left">
               <div className="font-medium text-zinc-200">© 2026 Sertaç Burak Eren</div>
-              <div className="mt-1">AI-first builder</div>
+              <div className="mt-1">AI Builder</div>
             </div>
             <div className="flex gap-4 text-sm">
               <a
-                className="text-zinc-400 hover:text-white"
-                href="https://github.com/sertacburakeren"
+                className="text-zinc-400 hover:text-white transition-colors"
+                href={`https://wa.me/${CONTACT.WHATSAPP_NUMBER}?text=${encodeURIComponent(CONTACT.WHATSAPP_DEFAULT_MESSAGE)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>
+              <a
+                className="text-zinc-400 hover:text-white transition-colors"
+                href={`mailto:${CONTACT.EMAIL}`}
+              >
+                Email
+              </a>
+              <a
+                className="text-zinc-400 hover:text-white transition-colors"
+                href={CONTACT.GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 GitHub
               </a>
               <a
-                className="text-zinc-400 hover:text-white"
-                href="https://linkedin.com/in/sertacburakeren"
+                className="text-zinc-400 hover:text-white transition-colors"
+                href={PARTNERS.GNR_STUDIO.WEBSITE}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                LinkedIn
-              </a>
-              <a
-                className="text-zinc-400 hover:text-white"
-                href="mailto:sertacburakeren@stu.topkapi.edu.tr"
-              >
-                Email
+                GNR Studio
               </a>
             </div>
           </div>

@@ -12,11 +12,28 @@ export const CONTACT = {
   EMAIL: "sertacburakeren@gmail.com",
   
   // Social Links
-  LINKEDIN: "https://linkedin.com/in/sertacburakeren",
   GITHUB: "https://github.com/sertacburakeren",
   
   // WhatsApp default message
   WHATSAPP_DEFAULT_MESSAGE: "Merhaba Sertaç, portfolyo üzerinden ulaşıyorum.",
+} as const;
+
+/**
+ * GNR Studio & Partners
+ */
+export const PARTNERS = {
+  GNR_STUDIO: {
+    NAME: "GNR Studio",
+    WEBSITE: "https://gnrstudio.com",
+    EMAIL: "contact@gnrstudio.com",
+    BIO_TR: "Sosyal medya içerik üretimi ve yönetimi • AI destekli yaratıcı prodüksiyon • proje geliştirme ve strateji",
+    BIO_EN: "social media content creation & management • AI-driven creative production • project development & strategy",
+  },
+  MITRAS_LAW_BLOG: {
+    NAME: "MitrasLawBlog",
+    WEBSITE: "https://mitraslawblog.com",
+    DESC: "GNR Studio bünyesinde aktif geliştirilen yayın/marka sitesi. İçerik, SEO ve yönetim paneli odaklı.",
+  },
 } as const;
 
 /**
