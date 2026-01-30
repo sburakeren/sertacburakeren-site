@@ -9,216 +9,313 @@ export type Project = {
   featured?: boolean;
   problem: string;
   solution: string;
+  summary?: string;
   impact: string[]; // bullets
-  stack: string[];
-  links?: {
-    demo?: string;
-    github?: string;
-    caseStudy?: string;
-  };
-  highlights?: string[]; // extra bullets
-  metrics?: { label: string; value: string }[];
+  stack?: string[];
+  highlights?: string[]; // 3-5 bullets, short
+  decisions?: string[]; // 2-4 bullets, metric-agnostic
+  outcomes?: string[]; // 2-4 bullets, metric-agnostic, no %
+  links?: { label: string; href: string; external?: boolean; caseStudy?: string }[];
+  gallery?: { src: string; alt: string }[];
+  status?: "case-study" | "shipped" | "in-progress";
   sections?: { heading: string; body: string; bullets?: string[] }[];
   ogImage?: string; // Custom OG image per project
 };
 
 export const PROJECTS: Project[] = [
   {
+    slug: "ankaralifeportal",
+    title: "AnkaraLifePortal",
+    subtitle: "Ankara odaklı yayın platformu için içerik ve kullanıcı yönetim sistemi.",
+    tags: ["Laravel", "PHP", "SQLite", "Ubuntu"],
+    category: "Backend",
+    year: "2025",
+    role: "Full-Stack Developer / Sistem Kurucu",
+    featured: true,
+    status: "case-study",
+    problem:
+      "Ankara odaklı bir yayın/portal yapısında içerik ve kullanıcı yönetimi dağınıktı; operasyonel süreçler tek yerde yönetilemiyordu.",
+    solution:
+      "Rol bazlı yetkilendirme, içerik yönetimi (CRUD), form doğrulama ve güvenlik katmanları ile operasyonel süreçleri tek panelde birleştirdim. Canlı ortam hazırlığı ile stabil çalışacak şekilde yapılandırdım.",
+    summary:
+      "Ankara odaklı yayın platformu için içerik ve kullanıcı yönetimini tek merkezde toplayan, güvenli ve sürdürülebilir panel sistemi.",
+    impact: [
+      "Yayın/operasyon süreçleri tek panelde toplandı.",
+      "Yönetim yükü azaldı; süreçler daha düzenli hale geldi.",
+      "NDA nedeniyle ekran görüntüsü yerine rol + yaklaşım + etki paylaşılır.",
+    ],
+    stack: ["Laravel", "PHP", "SQLite", "HTML/CSS/JS", "Ubuntu", "Nginx"],
+    highlights: [
+      "Giriş/rol bazlı yetkilendirme ve panel akışları",
+      "İçerik yönetimi (yazı/kategori vb.) için CRUD akışları",
+      "Form/iletişim akışlarında doğrulama ve UX iyileştirmeleri",
+      "Canlıya hazırlık: sunucu ortamı, konfig, temel güvenlik ayarları (NDA-safe)",
+    ],
+    decisions: [
+      "Panel ve yetkilendirme akışlarını rol bazlı kurgulama (RBAC yaklaşımı)",
+      "CRUD ekranlarını modüler ve sürdürülebilir yapıda tasarlama",
+      "Input validasyonu ve güvenli varsayılanlarla güvenlik katmanını ilk günden düşünme",
+      "Prod-first yaklaşım: sunucu ortamında stabil çalışacak şekilde yapılandırma",
+    ],
+    outcomes: [
+      "Yayın/operasyon süreçleri tek panelde toplandı",
+      "Yönetim yükü azaldı; süreçler daha düzenli hale geldi",
+    ],
+    links: [{ label: "Case Study", href: "/projects/ankaralifeportal", external: false }],
+    gallery: [],
+    sections: [],
+  },
+  {
     slug: "kesifendeks",
     title: "KeşifEndeks",
-    subtitle: "İş süreçlerini ölçülebilir hale getiren modüler platform.",
-    tags: ["Laravel", "MySQL", "Nginx"],
+    subtitle: "İş/operasyon verilerini tek noktada takip ve raporlama platformu.",
+    tags: ["Laravel", "PHP", "Ubuntu", "Nginx"],
     category: "Backend",
-    year: "2023",
-    role: "Lead Developer / Full-stack",
+    year: "2025",
+    role: "Kurucu / IT Yöneticisi + Full-Stack Developer",
     featured: true,
+    status: "case-study",
     problem:
-      "Dağınık operasyon akışları, takip edilemeyen iş kalemleri ve raporlanamayan metrikler; yönetimi zorlaştırıyordu.",
+      "İş/operasyon verileri dağınıktı; ekip için tek noktadan takip edilebilir bir sistem ihtiyacı vardı.",
     solution:
-      "Modüler bir yapı ile süreçleri tek merkezde topladım. Rol bazlı yetkilendirme, izlenebilir log akışı ve raporlama katmanı kurdum.",
+      "Modüler panel yaklaşımı ile kimlik doğrulama, kullanıcı yönetimi ve iş süreçlerini takip/raporlama mantığına dönüştüren yapı kurdum. RBAC ile erişim kuralları net ve yönetilebilir hale geldi.",
+    summary:
+      "İş/operasyon verilerini tek merkezde birleştiren, izlenebilir ve genişletilebilir panel sistemi.",
     impact: [
-      "Süreç görünürlüğü arttı, raporlama düzenli hale geldi.",
-      "Operasyon akışı standartlaştı ve hatalar azaldı.",
-      "Yönetim için karar verdiren dashboard yapısı oluştu.",
+      "Operasyon verisi tek yerde konsolide edildi.",
+      "Takip ve görünürlük arttı; süreçler disipline oldu.",
+      "NDA nedeniyle müşteri/alan detayları yerine rol + yaklaşım paylaşılır.",
     ],
-    stack: ["Laravel", "Blade", "MySQL", "Redis/Queue", "Nginx", "Linux"],
-    links: {
-      // demo: "https://...",
-      // github: "https://...",
-    },
-    highlights: ["RBAC (rol bazlı yetki)", "Log + audit izi", "Performans iyileştirmeleri"],
-    metrics: [
-      { label: "Ops Visibility", value: "+40%" },
-      { label: "Manual Work", value: "-60%" },
-      { label: "Reporting Time", value: "2h → 15min" },
+    stack: ["Laravel", "PHP", "Ubuntu", "Nginx", "SQL (Relational)"],
+    highlights: [
+      "Kimlik doğrulama ve temel kullanıcı yönetimi",
+      "İş süreçlerini takip/raporlama mantığına dönüştüren panel akışları (NDA-safe)",
+      "Modüler ekran planı ve genişleyebilir yapı",
+      "Canlı ortam rutini ve temel bakım süreçleri (Ubuntu + Nginx)",
     ],
-    sections: [
-      {
-        heading: "Problem",
-        body: "Operational processes were fragmented across multiple tools and spreadsheets. Teams struggled with visibility, manual data entry led to errors, and generating reports took hours. Management lacked real-time insights for decision-making.",
-        bullets: [
-          "No single source of truth for operational data",
-          "Manual tracking prone to human error",
-          "Report generation required 2+ hours of manual work",
-          "Limited audit trail for compliance",
-        ],
-      },
-      {
-        heading: "Approach",
-        body: "Designed a modular platform with role-based access control (RBAC), centralized logging, and automated reporting. Built with Laravel for rapid development and MySQL for relational data integrity. Focused on making the system extensible for future modules.",
-        bullets: [
-          "Modular architecture for easy feature additions",
-          "RBAC for granular permission management",
-          "Event-driven logging for full audit trail",
-          "Queue-based background jobs for reports",
-        ],
-      },
-      {
-        heading: "Solution",
-        body: "Delivered a unified platform where all operational workflows are tracked in one place. Automated report generation, role-based dashboards, and real-time metrics gave management the visibility they needed. System reduced manual work significantly while improving data accuracy.",
-      },
-      {
-        heading: "Impact",
-        body: "The platform transformed operational workflows. Teams gained 40% more visibility into processes, manual work decreased by 60%, and reporting time dropped from 2 hours to 15 minutes. The audit trail met compliance requirements and enabled data-driven decision-making.",
-      },
-      {
-        heading: "Learnings",
-        body: "Building for extensibility from day one paid off—new modules were added without architectural changes. RBAC granularity mattered more than anticipated. Background jobs prevented UI blocking for heavy reports. Most importantly: stakeholder feedback shaped the dashboard into a true decision-making tool.",
-      },
-      {
-        heading: "Stack & Operations",
-        body: "Laravel backend with Blade templating, MySQL for data integrity, Redis for queuing and caching. Deployed on Nginx with Linux. Modular structure allowed independent feature development. Queue workers handled heavy lifting for reports and data processing.",
-      },
+    decisions: [
+      "Modüler panel yaklaşımı ile büyüme sırasında kırılmayan yapı",
+      "RBAC ile erişim kurallarını net ve yönetilebilir tutma",
+      "İzlenebilirlik düşüncesi (log/audit yaklaşımı) — NDA-safe düzeyde",
+      "Prod-first: sunucu üzerinde stabilite ve bakım kolaylığı",
     ],
+    outcomes: [
+      "Operasyon verisi tek yerde konsolide edildi",
+      "Takip ve görünürlük arttı; süreçler disipline oldu",
+    ],
+    links: [{ label: "Case Study", href: "/projects/kesifendeks", external: false }],
+    gallery: [],
+    sections: [],
   },
   {
     slug: "chronolife",
     title: "ChronoLife",
     subtitle: "Yaşam ritmi verilerini analiz eden dashboard ve öneri sistemi.",
-    tags: ["Python", "ML", "Dashboard"],
+    tags: ["Python", "ML", "Dashboard", "Data Pipeline"],
     category: "AI",
-    year: "2024",
+    year: "2025",
     role: "AI Integration / Data Engineer",
     featured: true,
+    status: "in-progress",
     problem:
       "Yaşam tarzı verileri tekil kalıyor; kullanıcıya anlamlı içgörü ve aksiyon önerisi üretmek zordu.",
     solution:
       "Veri işleme + analiz katmanı kurup, dashboard üzerinde öneri/özet üretimine uygun bir yapı tasarladım (AI/ML entegrasyonuna hazır).",
+    summary:
+      "Çoklu yaşam ritmi verisini birleştirip anlamlı içgörü ve öneri üreten dashboard sistemi.",
     impact: [
       "Veriler tek ekranda anlamlı metriklere dönüştü.",
       "Öneri sistemi için temel mimari kuruldu.",
       "Kullanıcı davranışlarını izlemeye uygun dashboard akışı oluştu.",
     ],
     stack: ["Python", "Pandas", "ML", "Data Pipeline", "Dashboard UI"],
-    links: {},
-    highlights: ["Veri pipeline", "Model entegrasyonuna hazır yapı", "Ölçülebilir metrikler"],
-    metrics: [
-      { label: "Data Unification", value: "5 sources → 1" },
-      { label: "Insight Latency", value: "-70%" },
-      { label: "User Engagement", value: "+2.3x" },
+    highlights: [
+      "Çoklu veri kaynağını birleştiren ETL pipeline",
+      "Korelasyon analizi ve içgörü üretimi",
+      "ML model entegrasyonuna hazır modüler yapı",
+      "Actionable insight'lara odaklı kullanıcı arayüzü",
     ],
+    decisions: [
+      "ML entegrasyonu için baştan modüler tasarım, aylar sürecek refactoring'i önledi",
+      "Veri kalitesi, veri miktarından daha kritik çıktı—kötü kaynaklar insight'ları bozdu",
+      "Görselleştirme bağlamı (örn: 'bu senin için düşük') fancy grafiklerden daha fazla engagement sağladı",
+      "Modüler pipeline'lar özellikleri bağımsız olarak geliştirmeye olanak tanıdı",
+    ],
+    outcomes: [
+      "Çoklu veri kaynağını tek merkezde birleştiren ETL pipeline",
+      "İçgörü erişim süresini hızlandıran korelasyon analiz sistemi",
+      "Actionable insight'lara odaklanan kullanıcı arayüzü kuruldu",
+      "ML model entegrasyonuna hazır, ölçeklenebilir mimari",
+    ],
+    links: [{ label: "Case Study", href: "/projects/chronolife", external: false }],
+    gallery: [],
     sections: [
       {
         heading: "Problem",
-        body: "Lifestyle data (sleep, activity, nutrition, mood) remained siloed across different tracking apps. Users had raw numbers but lacked actionable insights. Building a recommendation system required unified data and a flexible architecture for ML integration.",
+        body: "Yaşam tarzı verileri (uyku, aktivite, beslenme, ruh hali) farklı uygulamalarda dağınıktı. Kullanıcılar ham sayılara sahipti ama işe yarar içgörülere ulaşamıyordu. Bir öneri sistemi kurmak, birleşik veri ve ML entegrasyonuna uygun esnek bir mimari gerektiriyordu.",
         bullets: [
-          "Data scattered across 5+ sources",
-          "No correlation analysis between metrics",
-          "Recommendation logic hard to implement",
-          "Users struggled to extract meaning from raw data",
+          "Veri 5+ kaynakta dağınık durumda",
+          "Metrikler arası korelasyon analizi yoktu",
+          "Öneri mantığı uygulamak zordu",
+          "Kullanıcılar ham veriden anlam çıkarmakta zorlanıyordu",
         ],
       },
       {
-        heading: "Approach",
-        body: "Built a data pipeline to unify multiple sources into a central warehouse. Designed the architecture to support ML model integration from day one. Created a dashboard that presents correlated insights and prepares the groundwork for AI-driven recommendations.",
+        heading: "Yaklaşım",
+        body: "Çoklu kaynağı merkezi bir veri deposunda birleştiren bir veri pipeline'ı kurdum. Mimaride ilk günden ML model entegrasyonunu destekleyecek şekilde tasarladım. Korelasyon içgörüleri sunan ve AI destekli öneri sistemine zemin hazırlayan bir dashboard oluşturdum.",
         bullets: [
-          "ETL pipeline for multi-source data ingestion",
-          "Pandas for transformation and correlation analysis",
-          "Modular design for plugging in ML models",
-          "Dashboard UI focused on actionable insights",
+          "Çoklu kaynak verisi için ETL pipeline",
+          "Pandas ile dönüşüm ve korelasyon analizi",
+          "ML modelleri için modüler tasarım",
+          "Actionable insight'lara odaklı Dashboard UI",
         ],
       },
       {
-        heading: "Solution",
-        body: "Delivered a unified dashboard where lifestyle metrics are correlated and visualized with context. Users see patterns like 'low sleep → low productivity' with suggested actions. The architecture supports adding ML recommendation models without rewriting core logic.",
+        heading: "Çözüm",
+        body: "Yaşam metriklerinin korelasyon içinde ve bağlamla görselleştirildiği birleşik bir dashboard sundum. Kullanıcılar 'düşük uyku → düşük verimlilik' gibi kalıpları önerilerle görebiliyor. Mimari, ML öneri modellerini eklemeyi çekirdek mantığı yeniden yazmadan destekliyor.",
       },
       {
-        heading: "Impact",
-        body: "Data unification reduced insight latency by 70%. Users engaged 2.3x more with actionable insights vs raw metrics. The ML-ready architecture enabled rapid experimentation with recommendation algorithms. Dashboard became the foundation for a full health coaching product.",
+        heading: "Etki",
+        body: "Veri birleştirme, içgörü üretimini hızlandırdı. Kullanıcılar ham metriklere göre actionable insight'larla daha fazla etkileşim kurdu. ML-ready mimari, öneri algoritmaları ile hızlı denemeler yapılmasını sağladı. Dashboard, eksiksiz bir health coaching ürününün temeli oldu.",
       },
       {
-        heading: "Learnings",
-        body: "Designing for ML integration early saved months of refactoring. Data quality matters more than quantity—bad sources degraded insights. Visualization context (e.g., 'this is low for you') drove engagement more than fancy graphs. Modular pipelines allowed iterating on features independently.",
+        heading: "Öğrenilenler",
+        body: "ML entegrasyonu için erken tasarım aylarca refactoring'ten kurtardı. Veri kalitesi, veri miktarından daha önemliydi—kötü kaynaklar insight'ları bozdu. Görselleştirme bağlamı (örn: 'bu senin için düşük') fancy grafiklerden daha fazla bağlılık sağladı. Modüler pipeline'lar, özellikleri bağımsız olarak geliştirmeye olanak tanıdı.",
       },
       {
-        heading: "Stack & Operations",
-        body: "Python backend with Pandas for data transformation, ML libraries for experimentation. Data pipeline runs on scheduled jobs. Dashboard built with modern UI framework for real-time updates. Modular architecture allows swapping ML models without breaking the system.",
+        heading: "Stack & Operasyonlar",
+        body: "Veri dönüşümü için Pandas, deneysel çalışmalar için ML kütüphaneleriyle Python backend. Veri pipeline'ı zamanlanmış job'lar üzerinde çalışır. Dashboard, gerçek zamanlı güncellemeler için modern UI framework ile kuruldu. Modüler mimari, ML modellerini sistemi kırmadan değiştirmeye olanak sağlar.",
       },
     ],
   },
   {
     slug: "kasatakip",
     title: "KasaTakip",
-    subtitle: "Gelir-gider, raporlama ve otomasyon odaklı finans takip aracı.",
-    tags: [".NET", "SQLite", "Reports"],
+    subtitle: "Gelir-gider takibi ve raporlama odaklı offline-first finans aracı.",
+    tags: [".NET", "WinForms", "Electron", "SQLite"],
     category: "Product",
-    year: "2022",
-    role: "Solo Developer / Product",
+    year: "2025",
+    role: "Ürün Sahibi + Geliştirici",
     featured: false,
+    status: "shipped",
     problem:
-      "Finans hareketleri manuel takip edilince hata riski artıyor; rapor üretmek ve geçmişe dönük analiz zorlaşıyordu.",
+      "Gelir-gider/işlem takibi manuel ilerliyordu; hata riski ve raporlama zayıftı.",
     solution:
-      "Yerel veri tabanı + raporlama katmanı ile basit ama güçlü bir finans takip sistemi geliştirdim. Kayıtlar standartlaştı, raporlar otomatikleşti.",
+      "Offline-first yaklaşım ile yerel SQLite tabanlı bir finans takip sistemi geliştirdim. Gelir/gider kayıtları, kategorizasyon, dönemsel raporlama ve veri doğrulama ile süreçler disipline oldu.",
+    summary:
+      "Gelir-gider takibini düzenli ve hızlı hale getiren, offline çalışan desktop finans aracı.",
     impact: [
-      "Gelir-gider takibi düzenli ve izlenebilir hale geldi.",
-      "Raporlama süresi ciddi ölçüde kısaldı.",
-      "Veri bütünlüğü arttı, manuel hata riski azaldı.",
+      "Takip düzeni oturdu; kayıtlar daha tutarlı hale geldi.",
+      "Raporlama daha hızlı ve düzenli ilerlemeye başladı.",
     ],
-    stack: [".NET", "SQLite", "Reporting", "Desktop UI"],
-    links: {},
-    highlights: ["Hızlı raporlama", "Düşük bakım maliyeti", "İşletme odaklı kullanım"],
-    metrics: [
-      { label: "Manual Errors", value: "-85%" },
-      { label: "Report Time", value: "1h → 5min" },
-      { label: "Data Integrity", value: "99.7%" },
+    stack: [".NET", "WinForms", "Electron", "SQLite"],
+    highlights: [
+      "Gelir/gider ve işlem kayıt mantığı",
+      "Kategori/etiketleme ve dönemsel raporlama kurgusu",
+      "Basit ama disiplinli kullanım akışı",
+      "Veri bütünlüğü için temel doğrulamalar ve kayıt kuralları",
     ],
-    sections: [
-      {
-        heading: "Problem",
-        body: "Small businesses tracked finances manually in spreadsheets, leading to errors, lost data, and hours spent on monthly reports. Historical analysis was nearly impossible. Need for a simple, reliable, offline-first solution.",
-        bullets: [
-          "Spreadsheet errors in 15%+ of entries",
-          "Monthly reports took 1+ hour to compile",
-          "No historical trend analysis",
-          "Risk of data loss (local files, no backup)",
-        ],
-      },
-      {
-        heading: "Approach",
-        body: "Built a lightweight desktop app with local SQLite database for speed and reliability. Focused on essential features: transaction entry, categorization, automated reporting. Kept UI simple and predictable for non-technical users.",
-        bullets: [
-          "Offline-first with SQLite for instant response",
-          "Categorization system for expense tracking",
-          "One-click report generation (monthly, yearly, custom)",
-          "Data validation to prevent common entry errors",
-        ],
-      },
-      {
-        heading: "Solution",
-        body: "Delivered a desktop finance tracker that runs entirely offline. Users enter transactions once, system auto-categorizes and validates data. Reports generate in seconds. Backup/restore built-in. Simple enough for daily use, powerful enough for business needs.",
-      },
-      {
-        heading: "Impact",
-        body: "Manual entry errors dropped 85%. Report generation time went from 1 hour to 5 minutes. Data integrity reached 99.7% through validation rules. Users gained confidence in their financial data and could spot trends instantly. Low maintenance—runs for months without intervention.",
-      },
-      {
-        heading: "Learnings",
-        body: "Simple beats complex for daily-use tools. SQLite's reliability made offline-first viable. Data validation prevented more errors than I expected. Users valued predictable behavior over flashy features. Desktop app = no server costs, no downtime, instant response—still relevant in 2024.",
-      },
-      {
-        heading: "Stack & Operations",
-        body: ".NET desktop app for native performance and cross-platform support. SQLite for zero-config local database. Built-in reporting engine generates Excel/PDF. Installer packages for Windows/Mac. No external dependencies—works offline, low maintenance.",
-      },
+    decisions: [
+      "Offline-first yaklaşım: veriyi yerel SQLite üzerinde tutma",
+      "Raporlama ekranlarını dönemsel karşılaştırmaya uygun kurgulama",
+      "Kullanım sürtüşmesini azaltan sade arayüz",
     ],
+    outcomes: [
+      "Takip düzeni oturdu; kayıtlar daha tutarlı hale geldi",
+      "Raporlama daha hızlı ve düzenli ilerlemeye başladı",
+    ],
+    links: [{ label: "Case Study", href: "/projects/kasatakip", external: false }],
+    gallery: [],
+    sections: [],
+  },
+  {
+    slug: "noisecoach",
+    title: "NoiseCoach",
+    subtitle: "Kişisel gürültü dozimetresi: maruziyeti takip eden ve farkındalık oluşturan sistem.",
+    tags: ["Android", "Kotlin", "Mobil", "Sensör"],
+    category: "Product",
+    year: "2025",
+    role: "Ürün Sahibi + Geliştirici",
+    featured: false,
+    status: "shipped",
+    problem:
+      "Günlük gürültü maruziyetini takip edecek pratik bir araç yoktu; farkındalık oluşturmak ve eşik bazlı uyarı sunmak gerekiyordu.",
+    solution:
+      "Ses seviyesi ölçümü ve günlük/haftalık maruziyet takibi yapan Android uygulaması geliştirdim. Offline-first veri kayıt mantığı ve eşik bazlı uyarılarla kullanıcı farkındalığını destekledim.",
+    summary:
+      "Gürültü seviyesini ölçen ve maruziyet takibi yapan kişisel dozimetre uygulaması.",
+    impact: [
+      "Kişisel maruziyet takibi düzenli hale geldi.",
+      "Raporlama ve farkındalık akışı netleşti.",
+      "Pratik ve sürdürülebilir takip deneyimi sunuldu.",
+    ],
+    stack: ["Android", "Kotlin", "SQLite", "Sensör API"],
+    highlights: [
+      "Ses seviyesi ölçümü ve maruziyet takibi akışı",
+      "Günlük/haftalık özet ve raporlama ekranları",
+      "Eşik bazlı uyarı ve farkındalık odaklı UX",
+      "Offline-first veri kaydı (cihaz üzerinde)",
+    ],
+    decisions: [
+      "Basit ve hızlı etkileşim: tek ekranda net durum",
+      "Offline-first veri kaydı (cihaz üzerinde)",
+      "Uyarıları gürültüye duyarlı ama gereksiz alarm üretmeyecek şekilde tasarlama",
+      "Raporlama ekranlarını haftalık trend odağında kurgulama",
+    ],
+    outcomes: [
+      "Kişisel maruziyet takibi düzenli hale geldi",
+      "Raporlama ve farkındalık akışı netleşti",
+    ],
+    links: [{ label: "Case Study", href: "/projects/noisecoach", external: false }],
+    gallery: [],
+    sections: [],
+  },
+  {
+    slug: "cybercoach",
+    title: "CyberCoach",
+    subtitle: "AI destekli siber güvenlik asistanı: öğrenme + pratik + yönlendirme tek yerde.",
+    tags: ["AI", "LLM", "Security", "Web"],
+    category: "AI",
+    year: "2025",
+    role: "Ürün Sahibi + Geliştirici",
+    featured: false,
+    status: "in-progress",
+    problem:
+      "Siber güvenlik öğreniminde parçalı kaynak ve pratik eksikliği vardı; tek bir yerde roadmap, yönlendirme ve pratik sunacak bir asistan sistemi gerekiyordu.",
+    solution:
+      "AI destekli güvenlik asistanı kurgusu oluşturdum. Soru-cevap, yönlendirme ve modüler içerik yapısı (checklist + mini ders + quiz) ile öğrenme çıktılarını ölçülebilir hale getirdim. NDA-safe/etik sınırlara uygun tasarım yaptım.",
+    summary:
+      "Güvenlik öğreniminde roadmap, pratik ve AI asistan deneyimini birleştiren platform.",
+    impact: [
+      "Tek yerde roadmap + pratik + asistan deneyimi hedeflendi.",
+      "Modüler içerik yapısı ve öğrenme çıktıları netleşti.",
+      "NDA-safe ve etik yaklaşım korundu.",
+    ],
+    stack: ["AI", "LLM", "Web", "Security"],
+    highlights: [
+      "AI destekli güvenlik asistanı kurgusu (soru-cevap, yönlendirme, pratik)",
+      "Roadmap/modül yapısı: başlangıç→ileri seviye",
+      "İlerleme takibi ve görev mantığı tasarımı",
+      "NDA-safe/etik: tehlikeli içerik üretmeyecek yardım yaklaşımı",
+    ],
+    decisions: [
+      "NDA-safe/etik: tehlikeli içerik üretmeyecek yardım yaklaşımı",
+      "Modüler içerik modeli: checklist + mini ders + quiz",
+      "Ürün akışında ölçülebilir öğrenme çıktıları hedefi",
+      "İlerleme takibi ve görev mantığını baştan kurgulama",
+    ],
+    outcomes: [
+      "MVP kapsamı ve ürün mimarisi netleşti",
+      "İçerik formatı ve kullanıcı akışları olgunlaştı",
+    ],
+    links: [{ label: "Case Study", href: "/projects/cybercoach", external: false }],
+    gallery: [],
+    sections: [],
   },
 ];
+
+// Dev-only validation: ensure all projects meet minimum content requirements
+if (process.env.NODE_ENV !== "production") {
+  const { validateProjects } = require("@/lib/projects/validateProjects");
+  validateProjects(PROJECTS);
+}
