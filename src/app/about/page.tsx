@@ -5,6 +5,7 @@ import AIGlow from "@/components/ui/AIGlow";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import SectionHeader from "@/components/ui/SectionHeader";
 import CalloutCard from "@/components/ui/CalloutCard";
+import { ChevronIcon } from "@/components/ui/ChevronIcon";
 import { type } from "@/lib/typography";
 import { CONTACT, PARTNERS } from "@/lib/constants";
 import type { Metadata } from "next";
@@ -79,21 +80,21 @@ export default function AboutPage() {
                 className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
               >
                 Odak
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                <ChevronIcon className="text-zinc-400 group-hover:text-white" />
               </a>
               <a 
                 href="#prensip" 
                 className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
               >
                 Prensipler
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                <ChevronIcon className="text-zinc-400 group-hover:text-white" />
               </a>
               <a 
                 href="#timeline" 
                 className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
               >
                 Yakın Dönem
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                <ChevronIcon className="text-zinc-400 group-hover:text-white" />
               </a>
             </nav>
           </div>
@@ -270,7 +271,7 @@ export default function AboutPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                       </svg>
                       gnrstudio.com
-                      <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                      <ChevronIcon className="text-indigo-400" />
                     </a>
                     <a
                       href={`mailto:${PARTNERS.GNR_STUDIO.EMAIL}`}
@@ -305,7 +306,7 @@ export default function AboutPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                       </svg>
                       mitraslawblog.com
-                      <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                      <ChevronIcon className="text-emerald-400" />
                     </a>
                   </div>
                 </div>
@@ -371,7 +372,7 @@ export default function AboutPage() {
                       className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-zinc-300 transition-all hover:border-indigo-400/30 hover:bg-white/10 hover:text-white hover:shadow-[0_0_0_1px_rgba(99,102,241,0.2)]"
                     >
                       {topic.label}
-                      <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                      <ChevronIcon className="text-zinc-400 group-hover:text-white" />
                     </a>
                   ))}
                 </div>

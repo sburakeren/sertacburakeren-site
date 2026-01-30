@@ -13,6 +13,8 @@ import ContactForm from "@/components/ContactForm";
 import Navbar from "@/components/Navbar";
 import ButtonLink from "@/components/ui/ButtonLink";
 import AIGlow from "@/components/ui/AIGlow";
+import { GlowButton } from "@/components/ui/GlowButton";
+import { ChevronIcon } from "@/components/ui/ChevronIcon";
 import { PROJECTS } from "@/data/projects";
 import { COLLABORATIONS } from "@/data/collabs";
 import { CONTACT, PARTNERS } from "@/lib/constants";
@@ -48,19 +50,19 @@ export default function Home() {
                 </ButtonLink>
                 <Link
                   href="/lab"
-                  className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-indigo-500/20 bg-indigo-500/5 px-5 py-2.5 text-sm font-medium text-indigo-200 transition-all duration-300 hover:border-indigo-400/40 hover:bg-indigo-500/10 hover:text-indigo-100 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] active:scale-[0.98]"
+                  className="group relative inline-flex flex-col items-center justify-center gap-1 overflow-hidden rounded-lg border border-indigo-500/30 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 px-6 py-3 text-sm font-medium text-indigo-100 transition-all duration-300 hover:border-indigo-400/50 hover:shadow-[0_0_25px_rgba(99,102,241,0.25)] active:scale-[0.98]"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Lab: NDA-safe Demo
-                    <motion.span
-                      className="inline-block"
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      →
-                    </motion.span>
+                    Lab: Kurumsal Demo
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ChevronIcon className="text-indigo-300" />
+                    </span>
                   </span>
-                  <span className="absolute inset-0 -z-0 bg-gradient-to-r from-transparent via-indigo-400/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <span className="text-[11px] text-indigo-300/70">NDA-safe senaryolar</span>
+                  {/* Subtle pulse ring on hover */}
+                  <span className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-indigo-400/5 to-transparent animate-pulse" />
+                  </span>
                 </Link>
               </div>
 
@@ -106,14 +108,13 @@ export default function Home() {
                 </p>
               </div>
 
-              <ButtonLink
+              <Link
                 href="/about"
-                variant="secondary"
-                size="sm"
-                className="hidden md:inline-flex"
+                className="group hidden md:inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
               >
-                Daha fazlası →
-              </ButtonLink>
+                Daha fazlası
+                <ChevronIcon className="text-zinc-500 group-hover:text-zinc-300" />
+              </Link>
             </div>
           </Reveal>
 
@@ -191,9 +192,13 @@ export default function Home() {
           </motion.div>
 
           <div className="mt-8 md:hidden">
-            <ButtonLink href="/about" variant="secondary" size="sm">
-              Daha fazlası →
-            </ButtonLink>
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              Daha fazlası
+              <ChevronIcon className="text-zinc-500 group-hover:text-zinc-300" />
+            </Link>
           </div>
         </motion.section>
 
@@ -365,8 +370,9 @@ export default function Home() {
                           )}
                         </div>
 
-                        <div className="mt-auto pt-5 text-sm font-medium text-indigo-300 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
-                          Case study'yi aç →
+                        <div className="mt-auto pt-5 flex items-center gap-2 text-sm font-medium text-indigo-300 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                          Case study'yi aç
+                          <ChevronIcon className="text-indigo-400" />
                         </div>
                       </div>
                     </CursorGlow>
@@ -412,36 +418,40 @@ export default function Home() {
               <div className="font-medium text-zinc-200">© 2026 Sertaç Burak Eren</div>
               <div className="mt-1">AI Builder</div>
             </div>
-            <div className="flex gap-4 text-sm">
+            <div className="flex gap-6 text-sm">
               <a
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="group relative text-zinc-400 hover:text-white transition-colors"
                 href={`https://wa.me/${CONTACT.WHATSAPP_NUMBER}?text=${encodeURIComponent(CONTACT.WHATSAPP_DEFAULT_MESSAGE)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 WhatsApp
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-white/60 transition-all duration-300 group-hover:w-full" />
               </a>
               <a
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="group relative text-zinc-400 hover:text-white transition-colors"
                 href={`mailto:${CONTACT.EMAIL}`}
               >
                 Email
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-white/60 transition-all duration-300 group-hover:w-full" />
               </a>
               <a
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="group relative text-zinc-400 hover:text-white transition-colors"
                 href={CONTACT.GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 GitHub
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-white/60 transition-all duration-300 group-hover:w-full" />
               </a>
               <a
-                className="text-zinc-400 hover:text-white transition-colors"
+                className="group relative text-zinc-400 hover:text-white transition-colors"
                 href={PARTNERS.GNR_STUDIO.WEBSITE}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 GNR Studio
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-white/60 transition-all duration-300 group-hover:w-full" />
               </a>
             </div>
           </div>

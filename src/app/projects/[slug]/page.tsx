@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { PROJECTS } from "@/data/projects";
 import SectionReveal from "@/components/projects/SectionReveal";
 import ProjectCard from "@/components/projects/ProjectCard";
@@ -76,8 +77,9 @@ export default function ProjectDetailPage({ params }: Props) {
 
   // If not enough in same category, fill with others
   if (relatedProjects.length < 3) {
+    const relatedSlugs = new Set(relatedProjects.map((p) => p.slug));
     const otherProjects = PROJECTS.filter(
-      (p) => p.slug !== project.slug && !relatedProjects.includes(p)
+      (p) => p.slug !== project.slug && !relatedSlugs.has(p.slug)
     ).slice(0, 3 - relatedProjects.length);
     relatedProjects.push(...otherProjects);
   }
@@ -138,23 +140,6 @@ export default function ProjectDetailPage({ params }: Props) {
                 )}
               </div>
             </div>
-
-            {/* Metrics */}
-            {project.metrics && project.metrics.length > 0 && (
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
-                {project.metrics.map((metric) => (
-                  <div
-                    key={metric.label}
-                    className="rounded-2xl border border-white/5 bg-white/[0.02] p-6"
-                  >
-                    <div className={type.muted}>{metric.label}</div>
-                    <div className="mt-2 text-2xl font-semibold tracking-tight text-emerald-200">
-                      {metric.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </SectionReveal>
         </section>
 
@@ -222,17 +207,87 @@ export default function ProjectDetailPage({ params }: Props) {
                 </>
               )}
 
+              {/* Key Decisions Section */}
+              {project.decisions && project.decisions.length > 0 && (
+                <SectionReveal>
+                  <article>
+                    <h2 className={type.h2}>Önemli Kararlar</h2>
+                    <ul className={`mt-6 space-y-3 ${type.body}`}>
+                      {project.decisions.map((decision, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-400" />
+                          <span className="leading-relaxed">{decision}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </SectionReveal>
+              )}
+
+              {/* Outcomes Section */}
+              {project.outcomes && project.outcomes.length > 0 && (
+                <SectionReveal>
+                  <article>
+                    <h2 className={type.h2}>Sonuçlar</h2>
+                    <ul className={`mt-6 space-y-3 ${type.body}`}>
+                      {project.outcomes.map((outcome, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                          <span className="leading-relaxed">{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </SectionReveal>
+              )}
+
               {/* Tech Stack Section (moved from sidebar for better flow) */}
+              {project.stack && project.stack.length > 0 && (
+                <SectionReveal>
+                  <article>
+                    <h2 className={type.h2}>Tech Stack</h2>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.stack.map((tech) => (
+                        <Badge key={tech} variant="indigo">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </article>
+                </SectionReveal>
+              )}
+
+              {/* Gallery Section */}
               <SectionReveal>
                 <article>
-                  <h2 className={type.h2}>Tech Stack</h2>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.stack.map((tech) => (
-                      <Badge key={tech} variant="indigo">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+                  <h2 className={type.h2}>Görseller</h2>
+                  {project.gallery && project.gallery.length > 0 ? (
+                    <div className="mt-6 grid gap-4 md:grid-cols-2">
+                      {project.gallery.map((image, idx) => (
+                        <div
+                          key={idx}
+                          className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
+                        >
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={600}
+                            height={400}
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center">
+                      <div className="inline-flex items-center gap-2 mb-3">
+                        <Badge variant="slate">Yakında</Badge>
+                      </div>
+                      <p className={`${type.body} text-zinc-400`}>
+                        Bu case study için ekran görüntülerini ekliyorum. İstersen demo linkiyle birlikte paylaşabilirim.
+                      </p>
+                    </div>
+                  )}
                 </article>
               </SectionReveal>
             </div>
@@ -243,32 +298,21 @@ export default function ProjectDetailPage({ params }: Props) {
               <div className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
                 <h3 className={type.label}>Bağlantılar</h3>
                 <div className="mt-4 space-y-2">
-                  {project.links?.demo ? (
-                    <a
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 transition-colors hover:bg-white/10"
-                    >
-                      Demo'yu Gör →
-                    </a>
+                  {project.links && project.links.length > 0 ? (
+                    project.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target={link.external !== false ? "_blank" : undefined}
+                        rel={link.external !== false ? "noopener noreferrer" : undefined}
+                        className="block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 transition-colors hover:bg-white/10"
+                      >
+                        {link.label}
+                      </a>
+                    ))
                   ) : (
                     <div className="block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400">
-                      Demo talep üzerine
-                    </div>
-                  )}
-                  {project.links?.github ? (
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-200 transition-colors hover:bg-white/10"
-                    >
-                      GitHub →
-                    </a>
-                  ) : (
-                    <div className="block rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-zinc-400">
-                      Kaynak talep üzerine
+                      Bağlantılar talep üzerine
                     </div>
                   )}
                 </div>
