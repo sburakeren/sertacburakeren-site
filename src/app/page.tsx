@@ -45,6 +45,22 @@ export default function Home() {
                 <ButtonLink href="#contact" variant="secondary" size="md">
                   İletişime Geç
                 </ButtonLink>
+                <Link
+                  href="/lab"
+                  className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-indigo-500/20 bg-indigo-500/5 px-5 py-2.5 text-sm font-medium text-indigo-200 transition-all duration-300 hover:border-indigo-400/40 hover:bg-indigo-500/10 hover:text-indigo-100 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] active:scale-[0.98]"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Lab: NDA-safe Demo
+                    <motion.span
+                      className="inline-block"
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+                  <span className="absolute inset-0 -z-0 bg-gradient-to-r from-transparent via-indigo-400/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                </Link>
               </div>
 
               <div className="mt-12 grid gap-6 md:gap-8 md:grid-cols-3">
@@ -61,16 +77,6 @@ export default function Home() {
               </div>
 
             <PromptTyper />
-            
-            <div className="mt-4 text-center">
-              <Link 
-                href="/lab" 
-                className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-indigo-300 transition-colors"
-              >
-                Lab: NDA-safe demo
-                <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
-              </Link>
-            </div>
           </MotionDiv>
         </section>
 

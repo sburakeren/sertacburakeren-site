@@ -44,10 +44,10 @@ export default function LabPage() {
           <AIGlow intensity="medium" />
           
           <h1 className={`relative z-10 max-w-3xl ${type.h1}`}>
-            Lab
+            Kurumsal Demo Senaryoları
           </h1>
           <p className={`relative z-10 mt-6 ${type.lead}`}>
-            NDA-safe demo alanı. Gerçek müşteri verisi içermez—pattern ve yaklaşım odaklı.
+            Gerçek proje deneyimlerinden türetilmiş, NDA-safe kurumsal senaryolar. Problem, yaklaşım ve çıktı odaklı.
           </p>
         </section>
 
@@ -56,7 +56,7 @@ export default function LabPage() {
           <SectionHeader 
             kicker="DEMO" 
             title="Örnek Senaryolar" 
-            subtitle="Production pattern'ler, observability-first yaklaşım." 
+            subtitle="Kurumsal düzeyde pattern'ler ve ölçeklenebilir yaklaşımlar." 
           />
 
           <div className="mt-8 space-y-6">
@@ -67,7 +67,15 @@ export default function LabPage() {
                     Finansal Anomali Tespiti
                   </h3>
                   <p className={`mt-2 ${type.muted}`}>
-                    Transaction pattern → anomaly detection → alert pipeline
+                    Transaction akışlarında anomali tespiti ve otomatik uyarı sistemi
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                  <h4 className={`${type.label} text-zinc-300`}>Problem</h4>
+                  <p className={`mt-2 ${type.muted}`}>
+                    Büyük hacimli transaction akışlarında manuel inceleme sürdürülemez hale gelir.
+                    Anomali tespiti için ekip sürekli veri izlemek zorunda kalır, bu da gecikmeye ve hatalara yol açar.
                   </p>
                 </div>
 
@@ -76,34 +84,34 @@ export default function LabPage() {
                   <ul className={`mt-3 space-y-2 ${type.muted}`}>
                     <li className="flex gap-2">
                       <span className="text-indigo-400">•</span>
-                      <span>Transaction veri akışını gerçek zamanlı izle</span>
+                      <span>Transaction akışını gerçek zamanlı stream processing ile izle</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-indigo-400">•</span>
-                      <span>Pattern baseline'ını history üzerinden oluştur</span>
+                      <span>Tarihsel veriden baseline pattern'ler çıkar</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-indigo-400">•</span>
-                      <span>Threshold aşımlarını otomatik algıla</span>
+                      <span>Threshold aşımlarını otomatik tespit et ve skorla</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-indigo-400">•</span>
-                      <span>Alert + context ile ilgili ekibe ilet</span>
+                      <span>Context-aware alert ile ilgili ekibe bildirim gönder</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                  <h4 className={`${type.label} text-zinc-300`}>Çıktı</h4>
+                  <h4 className={`${type.label} text-zinc-300`}>Çıktı (NDA-safe)</h4>
                   <p className={`mt-2 ${type.muted}`}>
-                    Manuel inceleme süresi azalır, anomali tespit hızı artar. Risk
-                    yönetimi proaktif hale gelir. Observability: log, metrik, trace bir arada.
+                    Manuel inceleme süresi azalır, anomali yakalama hızı artar. Risk yönetimi reaktif yerine proaktif hale gelir.
+                    Sistem log, metrik ve trace ile tam izlenebilir durumdadır.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="indigo">Production pattern</Badge>
-                  <Badge variant="emerald">Observability-first</Badge>
+                  <Badge variant="indigo">Stream Processing</Badge>
+                  <Badge variant="emerald">Real-time</Badge>
                   <Badge variant="slate">NDA-safe</Badge>
                 </div>
               </div>
@@ -116,7 +124,15 @@ export default function LabPage() {
                     İçerik Moderasyon Akışı
                   </h3>
                   <p className={`mt-2 ${type.muted}`}>
-                    User-generated content → auto-check → manual review → publish
+                    Kullanıcı içeriği için otomatik risk değerlendirme ve moderasyon sistemi
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                  <h4 className={`${type.label} text-zinc-300`}>Problem</h4>
+                  <p className={`mt-2 ${type.muted}`}>
+                    Yüksek hacimli user-generated content'i manuel moderasyon ile ölçeklemek mümkün değil.
+                    Yayınlama gecikmesi kullanıcı deneyimini etkiler, risk yönetimi ise kritik önemde.
                   </p>
                 </div>
 
@@ -125,33 +141,33 @@ export default function LabPage() {
                   <ul className={`mt-3 space-y-2 ${type.muted}`}>
                     <li className="flex gap-2">
                       <span className="text-emerald-400">•</span>
-                      <span>İçerik submit edilince otomatik ön kontrol (AI/rule-based)</span>
+                      <span>İçerik gönderiminde otomatik ön tarama (AI + rule-based)</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-emerald-400">•</span>
-                      <span>Risk skoruna göre moderasyon kuyruğuna yönlendir</span>
+                      <span>Risk skoruna göre otomatik onay veya manuel kuyruk yönlendirmesi</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-emerald-400">•</span>
-                      <span>Manuel onay sonrası yayınlama pipeline'ı tetikle</span>
+                      <span>Manuel onay sürecini context ve öncelik ile destekle</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-emerald-400">•</span>
-                      <span>Tüm süreç audit log ile izlenebilir</span>
+                      <span>Tüm akış audit log ile izlenebilir ve raporlanabilir</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                  <h4 className={`${type.label} text-zinc-300`}>Çıktı</h4>
+                  <h4 className={`${type.label} text-zinc-300`}>Çıktı (NDA-safe)</h4>
                   <p className={`mt-2 ${type.muted}`}>
-                    Moderasyon süresi azalır, manuel yük düşer. Risk kontrol altında kalır.
-                    Süreç şeffaf ve izlenebilir.
+                    Manuel moderasyon yükü düşer, yayınlama süresi iyileşir. Düşük riskli içerik otomatik onaylanır,
+                    yüksek risk manuel incelemeye yönlendirilir. Süreç şeffaf, ölçülebilir ve sürdürülebilir.
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="emerald">Workflow automation</Badge>
+                  <Badge variant="emerald">Workflow Automation</Badge>
                   <Badge variant="indigo">AI-assisted</Badge>
                   <Badge variant="slate">NDA-safe</Badge>
                 </div>
@@ -163,12 +179,11 @@ export default function LabPage() {
         {/* Note */}
         <section className="border-t border-white/5 bg-[#070A12]/60">
           <div className="mx-auto max-w-4xl px-6 py-12">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <h3 className={`${type.label} text-zinc-300`}>Not</h3>
+            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
+              <h3 className={`${type.label} text-amber-200`}>Önemli Not</h3>
               <p className={`mt-2 ${type.body}`}>
-                Buradaki senaryolar gerçek proje deneyimlerinden türetilmiştir ancak müşteri/
-                proje isimleri, spesifik metrikler ve iç süreçler NDA nedeniyle gizlenmiştir.
-                Odak: teknik yaklaşım + pattern + çıktı.
+                Bu senaryolar gerçek proje deneyimlerinden türetilmiştir. NDA gereği gerçek müşteri verisi, 
+                URL, ekran görüntüsü veya spesifik metrikler paylaşılmamıştır. Odak: problem, yaklaşım ve ölçülebilir çıktı.
               </p>
             </div>
           </div>
