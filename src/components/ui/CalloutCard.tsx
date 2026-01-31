@@ -3,7 +3,7 @@ import { type } from "@/lib/typography";
 interface CalloutCardProps {
   title: string;
   desc: string;
-  tone?: "indigo" | "emerald" | "slate";
+  tone?: "indigo" | "emerald" | "amber" | "purple" | "slate";
   children?: React.ReactNode;
 }
 
@@ -13,13 +13,15 @@ interface CalloutCardProps {
  */
 export default function CalloutCard({ title, desc, tone = "slate", children }: CalloutCardProps) {
   const toneStyles = {
-    indigo: "border-indigo-500/20 bg-indigo-500/5 hover:bg-indigo-500/10",
-    emerald: "border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10",
-    slate: "border-white/10 bg-white/5 hover:bg-white/10",
+    indigo: "border-white/10 bg-indigo-500/[0.03] hover:bg-white/[0.06]",
+    emerald: "border-white/10 bg-emerald-500/[0.03] hover:bg-white/[0.06]",
+    amber: "border-white/10 bg-amber-500/[0.03] hover:bg-white/[0.06]",
+    purple: "border-white/10 bg-purple-500/[0.03] hover:bg-white/[0.06]",
+    slate: "border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04]",
   };
 
   return (
-    <div className={`group/callout relative rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/5 ${toneStyles[tone]}`}>
+    <div className={`group/callout relative rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_16px_rgba(0,0,0,0.25)] ${toneStyles[tone]}`}>
       <h3 className={`${type.label} text-zinc-200`}>{title}</h3>
       <p className={`mt-2 text-sm leading-relaxed text-zinc-400`}>{desc}</p>
       {children && <div className="mt-3">{children}</div>}

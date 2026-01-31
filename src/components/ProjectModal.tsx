@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import ButtonLink from "@/components/ui/ButtonLink";
 import type { Project } from "@/data/projects";
+import { projectHref } from "@/lib/projects/paths";
 
 export default function ProjectModal({
   open,
@@ -165,12 +166,12 @@ export default function ProjectModal({
               <div className="relative flex flex-wrap items-center justify-between gap-3 border-t border-white/10 p-6">
                 <div className="flex flex-wrap gap-2">
                   <ButtonLink
-                    href={`/projects/${project.slug}`}
+                    href={projectHref(project)}
                     variant="primary"
                     size="sm"
                     className="bg-indigo-500 hover:bg-indigo-600 shadow-indigo-500/20 hover:shadow-indigo-500/30"
                   >
-                    Full Case Study
+                    Detayları Gör
                   </ButtonLink>
 
                   {project.links && project.links.length > 0 &&

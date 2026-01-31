@@ -11,6 +11,7 @@ import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import { type } from "@/lib/typography";
 import { CONTACT } from "@/lib/constants";
+import { normalizeProjectSlug } from "@/lib/projects/paths";
 import type { Metadata } from "next";
 
 type Props = {
@@ -19,12 +20,13 @@ type Props = {
 
 export async function generateStaticParams() {
   return PROJECTS.map((project) => ({
-    slug: project.slug,
+    slug: normalizeProjectSlug(project.slug),
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = PROJECTS.find((p) => p.slug === params.slug);
+  const slug = normalizeProjectSlug(params.slug);
+  const project = PROJECTS.find((p) => normalizeProjectSlug(p.slug) === slug);
 
   if (!project) {
     return {
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: project.title,
     description: project.subtitle,
     alternates: {
-      canonical: `/projects/${params.slug}`,
+      canonical: `/projects/${slug}`,
     },
     openGraph: {
       title: `${project.title} | Sertaç Burak Eren`,
@@ -64,9 +66,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function ProjectDetailPage({ params }: Props) {
-  const project = PROJECTS.find((p) => p.slug === params.slug);
+  const slug = normalizeProjectSlug(params.slug);
+  const project = PROJECTS.find((p) => normalizeProjectSlug(p.slug) === slug);
 
   if (!project) {
+    if (process.env.NODE_ENV !== "production") {
+      // Dev-only sanity log to catch slug mismatch/encoding issues quickly.
+      console.warn(`[projects/[slug]] Project not found for slug="${params.slug}" → normalized="${slug}"`);
+    }
     notFound();
   }
 
@@ -127,7 +134,9 @@ export default function ProjectDetailPage({ params }: Props) {
                     <span className="text-sm text-zinc-400">{project.year}</span>
                   )}
                   {project.featured && <Badge variant="emerald">Featured</Badge>}
-                  <Badge variant="slate">Case Study</Badge>
+                  {project.status === "case-study" && <Badge variant="slate">Detaylı İçerik</Badge>}
+                  {project.status === "shipped" && <Badge variant="emerald">Shipped</Badge>}
+                  {project.status === "in-progress" && <Badge variant="amber">In Progress</Badge>}
                 </div>
 
                 <h1 className={`mt-6 max-w-3xl ${type.h1}`}>{project.title}</h1>
@@ -284,7 +293,7 @@ export default function ProjectDetailPage({ params }: Props) {
                         <Badge variant="slate">Yakında</Badge>
                       </div>
                       <p className={`${type.body} text-zinc-400`}>
-                        Bu case study için ekran görüntülerini ekliyorum. İstersen demo linkiyle birlikte paylaşabilirim.
+                        Proje görselleri hazırlanıyor. Detaylı bilgi için iletişime geçebilirsiniz.
                       </p>
                     </div>
                   )}
@@ -363,7 +372,7 @@ export default function ProjectDetailPage({ params }: Props) {
               </SectionReveal>
 
               <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {relatedProjects.map((relatedProject, idx) => (
+                {relatedProjects.map((relatedProject) => (
                   <SectionReveal key={relatedProject.slug}>
                     <ProjectCard project={relatedProject} />
                   </SectionReveal>

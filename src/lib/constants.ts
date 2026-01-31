@@ -15,7 +15,7 @@ export const CONTACT = {
   GITHUB: "https://github.com/sertacburakeren",
   
   // WhatsApp default message
-  WHATSAPP_DEFAULT_MESSAGE: "Merhaba Sertaç, portfolyo üzerinden ulaşıyorum.",
+  WHATSAPP_DEFAULT_MESSAGE: "Merhaba, web projesi hakkında görüşmek istiyorum. Müsait olduğunuzda dönüş yapabilir misiniz?",
 } as const;
 
 /**
@@ -32,7 +32,7 @@ export const PARTNERS = {
   MITRAS_LAW_BLOG: {
     NAME: "MitrasLawBlog",
     WEBSITE: "https://mitraslawblog.com",
-    DESC: "GNR Studio bünyesinde aktif geliştirilen yayın/marka sitesi. İçerik, SEO ve yönetim paneli odaklı.",
+    DESC: "MitrasLawBlog — GNR Studio bünyesinde geliştirilen, içerik/SEO ve yönetim paneli odaklı yayın platformu. Hukuk içeriğini modern, erişilebilir ve sürdürülebilir bir yapıda sunmayı hedefler.",
   },
 } as const;
 

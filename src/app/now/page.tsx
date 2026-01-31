@@ -1,14 +1,16 @@
 "use client";
 
 import SiteFooter from "@/components/SiteFooter";
-import ButtonLink from "@/components/ui/ButtonLink";
 import Navbar from "@/components/Navbar";
 import AIGlow from "@/components/ui/AIGlow";
 import CalloutCard from "@/components/ui/CalloutCard";
 import { MaskReveal } from "@/components/ui/MaskReveal";
+import { CTABand } from "@/components/ui/CTABand";
+import { CyberSecurityEffects } from "@/components/CyberSecurityEffects";
 import { type } from "@/lib/typography";
 import { CONTACT, PARTNERS } from "@/lib/constants";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function NowPage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -16,17 +18,31 @@ export default function NowPage() {
     <div className="relative min-h-screen bg-[#070A12]">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-indigo-500/5 via-transparent to-transparent" />
+      
+      {/* Cyber Security Effects - Shield for active status */}
+      <CyberSecurityEffects variant="shield" intensity="subtle" />
 
       <div className="relative">
         <Navbar />
 
         {/* Hero */}
-        <section className="relative mx-auto max-w-3xl px-6 py-16 md:py-24">
+        <section className="relative mx-auto max-w-3xl px-6 pt-6 pb-3 md:pt-8 md:pb-4">
           {/* AI Glow - Now Header */}
           <AIGlow intensity="medium" />
           
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
+          <motion.div
+            variants={{ animate: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } }}
+            initial="initial"
+            animate="animate"
+            className="relative z-10"
+          >
+            <motion.div
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+              }}
+              className="mb-2 mt-0 flex items-center gap-3"
+            >
               <div className="relative flex items-center gap-2">
                 {/* Pulsing green dot */}
                 <span className="relative flex h-3 w-3">
@@ -39,45 +55,95 @@ export default function NowPage() {
               </div>
               <span className="text-xs text-zinc-500">•</span>
               <span className="text-xs text-zinc-500">Güncelleme: Ocak 2026</span>
-            </div>
+            </motion.div>
 
-            <MaskReveal as="h1" className={type.h1}>
-              Şu An Ne Yapıyorum
-            </MaskReveal>
-            <p className={`mt-6 ${type.muted}`}>
-              Güncel odak, iş ve düşüncelerimin canlı görüntüsü.
-            </p>
-          </div>
+            <motion.div
+              variants={{
+                initial: { opacity: 0, y: 30 },
+                animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 } },
+              }}
+            >
+              <MaskReveal as="h1" className={type.h1}>
+                Şu An Ne Yapıyorum
+              </MaskReveal>
+              <p className={`mt-2 ${type.body} text-zinc-300/90`}>
+                Güncel odaklarım, denediklerim ve son eklenenler.
+              </p>
+            </motion.div>
+
+            {/* Intro Card - Below title */}
+            <motion.div
+              variants={{
+                initial: { opacity: 0, y: 20 },
+                animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.3 } },
+              }}
+              className="mt-8 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.08] p-6 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)] overflow-hidden
+                         before:absolute before:inset-0 before:opacity-40 before:bg-[radial-gradient(800px_circle_at_30%_20%,rgba(99,102,241,0.15),transparent_50%),radial-gradient(600px_circle_at_70%_80%,rgba(34,211,238,0.10),transparent_50%)] before:content-['']"
+            >
+              <div className="relative z-10">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="h-10 w-10 rounded-xl bg-indigo-500/[0.12] border border-indigo-400/[0.20] flex items-center justify-center">
+                      <svg className="h-5 w-5 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`${type.label} text-zinc-100`}>Hızlı Bakış</h3>
+                    <p className={`mt-2 text-sm leading-relaxed text-zinc-300`}>
+                      AI entegrasyonu, ölçeklenebilir backend sistemleri ve güvenlik odaklı çözümler üretiyorum. 
+                      Prod-first yaklaşımla, haftalık iterasyonlar ve ölçülebilir sonuçlar — kurumsal disiplin, startup hızı.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Quick Status Strip */}
-        <section className="mx-auto max-w-3xl px-6 pb-12">
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-5">
-              <div className={`${type.kicker} text-indigo-200`}>Şu an</div>
-              <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
-                AI-entegre sistemler üzerinde çalışıyorum—öneri motorları ve veri pipeline'ları inşa ediyorum.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
-              <div className={`${type.kicker} text-emerald-200`}>Öğreniyorum</div>
-              <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
-                İleri seviye prompt mühendisliği ve LLM entegrasyon kalıplarını öğreniyorum.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-              <div className={`${type.kicker} text-amber-200`}>Son eklenen</div>
-              <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>
-                MitrasLawBlog (GNR Studio): aktif geliştirme, yayın akışı ve panel iyileştirmeleri.
-              </p>
-            </div>
-          </div>
+        <section className="mx-auto max-w-3xl px-6 pb-10 mt-2">
+          <motion.div
+            className="grid gap-4 md:grid-cols-3"
+            variants={{ animate: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } } }}
+            initial="initial"
+            animate="animate"
+          >
+            {[
+              {
+                label: "Şu an",
+                color: "indigo",
+                content: "AI-entegre sistemler üzerinde çalışıyorum—öneri motorları ve veri pipeline'ları inşa ediyorum.",
+              },
+              {
+                label: "Öğreniyorum",
+                color: "emerald",
+                content: "İleri seviye prompt mühendisliği ve LLM entegrasyon kalıplarını öğreniyorum.",
+              },
+              {
+                label: "Son eklenen",
+                color: "amber",
+                content: "MitrasLawBlog (GNR Studio): aktif geliştirme, yayın akışı ve panel iyileştirmeleri.",
+              },
+            ].map((item) => (
+              <motion.div
+                key={item.label}
+                variants={{
+                  initial: { opacity: 0, y: 20 },
+                  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                }}
+                className={`rounded-2xl border border-${item.color}-500/[0.12] bg-${item.color}-500/[0.03] p-5 hover:border-${item.color}-500/[0.2] transition-all`}
+              >
+                <div className={`${type.kicker} text-${item.color}-200`}>{item.label}</div>
+                <p className={`mt-3 text-sm leading-relaxed text-zinc-300`}>{item.content}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </section>
 
         {/* Çalışma Modu */}
-        <section className="mx-auto max-w-3xl px-6 pb-16">
+        <section className="mx-auto max-w-3xl px-6 pb-10">
           <div className="grid gap-4 md:grid-cols-3">
             <CalloutCard 
               title="Derin Çalışma" 
@@ -98,16 +164,16 @@ export default function NowPage() {
         </section>
 
         {/* Live Status Panel */}
-        <section className="mx-auto max-w-3xl px-6 pb-16">
-          <h2 className={`${type.h2} mb-8`}>Canlı Durum Paneli</h2>
+        <section className="mx-auto max-w-3xl px-6 pb-12">
+          <h2 className={`${type.h2} mb-6`}>Canlı Durum Paneli</h2>
 
           <div className="space-y-4">
             {/* İnşa Ediyorum */}
             <div
-              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+              className={`group rounded-2xl border bg-white/[0.02] backdrop-blur-sm p-6 transition-all duration-300 ${
                 hoveredItem === null || hoveredItem === "build"
-                  ? "border-indigo-500/20 translate-x-0 opacity-100"
-                  : "border-white/5 -translate-x-1 opacity-60"
+                  ? "border-white/[0.08] translate-x-0 opacity-100"
+                  : "border-white/[0.05] -translate-x-1 opacity-60"
               }`}
               onMouseEnter={() => setHoveredItem("build")}
               onMouseLeave={() => setHoveredItem(null)}
@@ -142,10 +208,10 @@ export default function NowPage() {
 
             {/* Öğreniyorum */}
             <div
-              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+              className={`group rounded-2xl border bg-white/[0.02] backdrop-blur-sm p-6 transition-all duration-300 ${
                 hoveredItem === null || hoveredItem === "learn"
-                  ? "border-emerald-500/20 translate-x-0 opacity-100"
-                  : "border-white/5 -translate-x-1 opacity-60"
+                  ? "border-white/[0.08] translate-x-0 opacity-100"
+                  : "border-white/[0.05] -translate-x-1 opacity-60"
               }`}
               onMouseEnter={() => setHoveredItem("learn")}
               onMouseLeave={() => setHoveredItem(null)}
@@ -181,10 +247,10 @@ export default function NowPage() {
 
             {/* Ship Ediyorum */}
             <div
-              className={`group rounded-2xl border bg-white/[0.02] p-6 transition-all duration-300 ${
+              className={`group rounded-2xl border bg-white/[0.02] backdrop-blur-sm p-6 transition-all duration-300 ${
                 hoveredItem === null || hoveredItem === "ship"
-                  ? "border-amber-500/20 translate-x-0 opacity-100"
-                  : "border-white/5 -translate-x-1 opacity-60"
+                  ? "border-white/[0.08] translate-x-0 opacity-100"
+                  : "border-white/[0.05] -translate-x-1 opacity-60"
               }`}
               onMouseEnter={() => setHoveredItem("ship")}
               onMouseLeave={() => setHoveredItem(null)}
@@ -228,7 +294,7 @@ export default function NowPage() {
         </section>
 
         {/* Principles */}
-        <section className="mx-auto max-w-3xl px-6 pb-20">
+        <section className="mx-auto max-w-3xl px-6 pb-16">
           <div className={type.kicker}>PRENSİPLER</div>
           <h2 className={`mt-3 ${type.h2}`}>Çalışma Prensiplerim</h2>
 
@@ -271,22 +337,15 @@ export default function NowPage() {
         </section>
 
         {/* CTA */}
-        <section className="border-t border-white/5 bg-[#070A12]/60">
-          <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-            <h2 className={type.h2}>Projen Mi Var?</h2>
-            <p className={`mt-3 ${type.body}`}>
-              Üzerinde çalıştıklarım ihtiyaçlarınla uyuşuyorsa, konuşalım.
-            </p>
-            <ButtonLink
-              href={`mailto:${CONTACT.EMAIL}`}
-              variant="primary"
-              size="md"
-              className="mt-6"
-            >
-              İletişime Geç
-            </ButtonLink>
-          </div>
-        </section>
+        <CTABand
+          title="Projen Mi Var?"
+          description="Üzerinde çalıştıklarım ihtiyaçlarınla uyuşuyorsa, konuşalım."
+          primaryLabel="İletişime Geç"
+          primaryHref={`mailto:${CONTACT.EMAIL}`}
+          secondaryLabel="Projeler"
+          secondaryHref="/projects"
+          trustItems={["NDA-safe", "Prod-first", "Ölçeklenebilir"]}
+        />
 
         <SiteFooter />
       </div>

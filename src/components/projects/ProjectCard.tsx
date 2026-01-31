@@ -8,6 +8,7 @@ import CursorGlow from "@/components/CursorGlow";
 import { ChevronIcon } from "@/components/ui/ChevronIcon";
 import { type } from "@/lib/typography";
 import { prefersReducedMotion } from "@/lib/motion";
+import { projectHref } from "@/lib/projects/paths";
 import type { Project } from "@/data/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -56,7 +57,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       ref={ref}
-      href={`/projects/${project.slug}`}
+      href={projectHref(project)}
       className="group/card flex h-full"
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -77,7 +78,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           ease: [0.16, 1, 0.3, 1],
         }}
       >
-        <GlowCard className="w-full transition-shadow duration-300 group-hover/card:shadow-xl group-hover/card:shadow-indigo-500/10">
+        <GlowCard className="w-full transition-shadow duration-300 group-hover/card:shadow-xl group-hover/card:shadow-white/5">
           <CursorGlow>
             <div className="flex h-full flex-col">
               {/* Header */}
@@ -89,7 +90,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                   {project.year && <div className={`mt-1 ${type.muted}`}>{project.year}</div>}
                 </div>
                 {project.featured && (
-                  <span className="shrink-0 rounded-full bg-indigo-500/10 px-2.5 py-1 text-xs font-medium text-indigo-200">
+                  <span className="shrink-0 rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-zinc-100">
                     Öne Çıkan
                   </span>
                 )}
@@ -124,7 +125,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               <div className="mt-auto space-y-4 pt-6">
                 {/* CTA */}
                 <motion.div
-                  className={`${type.label} flex items-center gap-2 text-indigo-200`}
+                  className={`${type.label} flex items-center gap-2 text-zinc-100`}
                   initial={{ opacity: 0, x: -4 }}
                   animate={{
                     opacity: isHovered ? 1 : 0,
@@ -135,8 +136,8 @@ export default function ProjectCard({ project }: { project: Project }) {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  Case study'yi aç
-                  <ChevronIcon className="text-indigo-400" animated={false} />
+                  Detayları Gör
+                  <ChevronIcon className="text-zinc-400" animated={false} />
                 </motion.div>
               </div>
             </div>

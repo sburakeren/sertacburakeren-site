@@ -19,19 +19,19 @@ export function ExploreRail({
   return (
     <Link href={href} className={cn("group block", className)}>
       <motion.div
-        className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
-        whileHover={{ scale: 1.01 }}
-        transition={{ duration: 0.2 }}
+        className="relative overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.015] backdrop-blur-sm transition-all duration-300 hover:border-white/[0.12] hover:bg-white/[0.03]"
+        whileHover={{ scale: 1.005 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
-        {/* Gradient shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+        {/* Subtle gradient shine effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
 
         {/* Content */}
         <div className="relative z-10 flex items-center justify-between gap-4 px-6 py-4 md:px-8 md:py-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/10 ring-1 ring-indigo-500/20 transition-all group-hover:bg-indigo-500/20 group-hover:ring-indigo-500/30">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/[0.04] ring-1 ring-indigo-500/[0.08] transition-all group-hover:bg-indigo-500/[0.08] group-hover:ring-indigo-500/[0.12]">
               <svg
-                className="h-5 w-5 text-indigo-300"
+                className="h-5 w-5 text-indigo-300/80"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -48,20 +48,17 @@ export function ExploreRail({
               <div className="text-sm font-medium text-zinc-300 transition-colors group-hover:text-white">
                 {label}
               </div>
-              <div className="text-xs text-zinc-500">
-                Detaylı hikaye ve değerler
-              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-sm font-medium text-indigo-300 transition-colors group-hover:text-indigo-200">
+          <div className="flex items-center gap-2 text-sm font-medium text-indigo-300/80 transition-colors group-hover:text-indigo-200">
             <span className="hidden sm:inline">Keşfet</span>
-            <ChevronIcon className="text-indigo-400" />
+            <ChevronIcon className="text-indigo-400/70" />
           </div>
         </div>
 
-        {/* Bottom accent line */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+        {/* Bottom accent line - more subtle */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/[0.08] to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
       </motion.div>
     </Link>
   );

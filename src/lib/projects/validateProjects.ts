@@ -1,4 +1,5 @@
 import type { Project } from "@/data/projects";
+import { normalizeProjectSlug, projectHrefFromSlug } from "@/lib/projects/paths";
 
 /**
  * Dev-only validator to ensure all projects meet minimum content requirements.
@@ -39,11 +40,18 @@ export function validateProjects(projects: Project[]): void {
     const outcomes = project.outcomes || [];
     if (outcomes.length < 2) issues.push(`outcomes count ${outcomes.length} < 2`);
 
-    // Case study link validation
-    const links = project.links || [];
-    const caseStudyLink = links.find((link) => link.href.startsWith("/projects/"));
-    if (!caseStudyLink) {
-      issues.push("missing internal case study link starting with /projects/");
+    // Slug sanity: should be normalized and routable.
+    const normalizedSlug = normalizeProjectSlug(project.slug);
+    if (project.slug !== normalizedSlug) {
+      issues.push(`slug not normalized ("${project.slug}" → "${normalizedSlug}")`);
+    }
+    if (project.slug.includes("/")) {
+      issues.push('slug must not include "/"');
+    }
+    // Ensure we can build a stable internal href for every project.
+    const href = projectHrefFromSlug(project.slug);
+    if (!href.startsWith("/projects/")) {
+      issues.push(`invalid project href: ${href}`);
     }
 
     if (issues.length > 0) {

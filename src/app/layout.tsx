@@ -10,11 +10,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://sertacburakeren.co
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Sertaç Burak Eren — AI-First Builder",
+    default: "Sertaç Burak Eren — Product & Systems Engineer",
     template: "%s | Sertaç Burak Eren",
   },
   description:
-    "AI-driven systems, scalable products, and enterprise solutions. Specializing in AI integration, security-first architecture, and measurable outcomes.",
+    "AI-integrated systems, scalable enterprise products, and security-first architecture. Building measurable solutions for modern businesses.",
   keywords: [
     "AI integration",
     "machine learning",
@@ -38,15 +38,15 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     url: SITE_URL,
     siteName: "Sertaç Burak Eren",
-    title: "Sertaç Burak Eren — AI-First Builder",
+    title: "Sertaç Burak Eren — Product & Systems Engineer",
     description:
-      "AI-driven systems, scalable products, and enterprise solutions. Specializing in AI integration, security-first architecture, and measurable outcomes.",
+      "AI-integrated systems, scalable enterprise products, and security-first architecture. Building measurable solutions for modern businesses.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sertaç Burak Eren — AI-First Builder",
+    title: "Sertaç Burak Eren — Product & Systems Engineer",
     description:
-      "AI-driven systems, scalable products, and enterprise solutions. Specializing in AI integration, security-first architecture, and measurable outcomes.",
+      "AI-integrated systems, scalable enterprise products, and security-first architecture. Building measurable solutions for modern businesses.",
   },
   robots: {
     index: true,
@@ -71,9 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "https://github.com/sertacburakeren",
       "https://gnrstudio.com",
     ],
-    jobTitle: "AI-First Builder",
+    jobTitle: "Product & Systems Engineer",
     description:
-      "AI-driven systems, scalable products, and enterprise solutions. Specializing in AI integration, security-first architecture, and measurable outcomes.",
+      "AI-integrated systems, scalable enterprise products, and security-first architecture. Building measurable solutions for modern businesses.",
   };
 
   return (

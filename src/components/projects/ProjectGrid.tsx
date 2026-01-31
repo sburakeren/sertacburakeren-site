@@ -55,10 +55,10 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
       filtered = filtered.filter((p) => p.category === selectedCategory);
     }
 
-    // Tags - check both tags and stack fields
+    // Tags - OR logic: check if project has ANY of the selected tags
     if (selectedTags.length > 0) {
       filtered = filtered.filter((p) =>
-        selectedTags.every((tag) => p.tags.includes(tag) || (p.stack && p.stack.includes(tag)))
+        selectedTags.some((tag) => p.tags.includes(tag) || (p.stack && p.stack.includes(tag)))
       );
     }
 
@@ -88,6 +88,11 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
     );
   };
 
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+    setSelectedTags([]); // Clear tech filters when category changes
+  };
+
   return (
     <div className="space-y-8">
       {/* Filters */}
@@ -101,7 +106,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
         allTags={allTags}
         allCategories={allCategories}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        onCategoryChange={handleCategoryChange}
       />
 
       {/* Results count */}

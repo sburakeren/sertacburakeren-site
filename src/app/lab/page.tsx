@@ -56,7 +56,8 @@ export default function LabPage() {
           <SectionHeader 
             kicker="DEMO" 
             title="Örnek Senaryolar" 
-            subtitle="Kurumsal düzeyde pattern'ler ve ölçeklenebilir yaklaşımlar." 
+            lead="Kurumsal düzeyde pattern'ler ve ölçeklenebilir yaklaşımlar." 
+            showDivider={true}
           />
 
           <div className="mt-8 space-y-6">
