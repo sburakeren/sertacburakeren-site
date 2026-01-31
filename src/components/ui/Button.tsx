@@ -15,7 +15,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles =
       "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/20 disabled:opacity-50 disabled:cursor-not-allowed";
 
-    const variants = {
+    const variants: Record<ButtonVariant, string> = {
       primary: clsx(
         "bg-white text-black rounded-full shadow-lg shadow-white/20",
         "hover:-translate-y-0.5 hover:shadow-xl hover:shadow-white/30",
@@ -31,9 +31,20 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "underline decoration-zinc-500 hover:decoration-white",
         "underline-offset-4 decoration-1"
       ),
+      glass: clsx(
+        "backdrop-blur-md bg-white/[0.06] border border-white/[0.10] text-zinc-100",
+        "hover:bg-white/[0.10] hover:border-white/[0.14]",
+        "shadow-[0_10px_30px_rgba(0,0,0,0.35)] rounded-xl"
+      ),
+      glassPrimary: clsx(
+        "backdrop-blur-md bg-gradient-to-br from-indigo-500/30 to-purple-600/30",
+        "border border-white/[0.12] text-white",
+        "hover:from-indigo-500/40 hover:to-purple-600/40",
+        "shadow-[0_12px_34px_rgba(99,102,241,0.20)] rounded-xl"
+      ),
     };
 
-    const sizes = {
+    const sizes: Record<ButtonSize, string> = {
       sm: "px-4 py-2 text-sm",
       md: "px-6 py-3 text-sm",
     };
